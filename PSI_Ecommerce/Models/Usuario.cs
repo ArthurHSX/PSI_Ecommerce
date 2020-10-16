@@ -29,14 +29,27 @@ namespace PSI_Ecommerce.Models
                 
         }
 
-        public Usuario RetornarUsuario(string _username)
+        public Usuario BuscaUsuario(Usuario usuario)
         {
+            if(String.IsNullOrEmpty(usuario.Username) && String.IsNullOrEmpty(usuario.Email))
+            { return null; }
+
             using (var contexto = new Context.EcommerceContext())
             {
-                return (from us in contexto.Usuario
-                        where us.Username == _username
-                        select us).FirstOrDefault();
+                if (String.IsNullOrEmpty(usuario.Username))
+                {
+                    return (from us in contexto.Usuario
+                            where us.Email == usuario.Email
+                            select us).FirstOrDefault();
+                }
+                else if (String.IsNullOrEmpty(usuario.Email))
+                {
+                    return (from us in contexto.Usuario
+                            where us.Username == usuario.Username
+                            select us).FirstOrDefault();
+                }
             }
+            return null;
         }
 
         public void BuscarContatos()

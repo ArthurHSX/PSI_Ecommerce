@@ -1,13 +1,13 @@
 ﻿@model Usuario;
 
 <div class="text-center">
-    <form class="form-signin">
+    <form class="form-signin" asp-action="BuscaUsuario" asp-controller="Login" method="get" >
         @*<img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/OLX-Logo.png" alt="" width="72" height="72">*@
-        <h1 class="h3 mb-3 font-weight-normal">Fazer Login</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Efetuar Login</h1>
         <label for="inputEmail" class="sr-only">Usuário</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input asp-for="Email" type="email" class="form-control" placeholder="Email" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Senha</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+        <input asp-for="Senha" type="password" class="form-control" placeholder="Password" required="">
         <div class="checkbox mb-3">
             <label>
                 <input type="checkbox" value="remember-me"> Lembre-se de mim

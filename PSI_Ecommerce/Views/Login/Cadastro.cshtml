@@ -3,11 +3,13 @@
 <div style="background-color: #f5f5f5;">
     <div class="container" style="background-color: white;">
         <div class="card-block">
-            <form>
+            @* O trecho abaixo está definido para chamar a action CadastraUsuario do Controller login para persistir*@
+            <form asp-action="CadastraUsuario" asp-controller="Login" method="post">
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="Nome">Nome <h11>*</h11></label>
                     <div class="col-md-8">
-                        <input id="Nome" name="Nome" placeholder="" class="form-control input-md" required="" type="text">
+                        @* asp-for referencia a propriedade da classe Usuario *@
+                        <input asp-for="Nome" placeholder="" class="form-control input-md" required="" type="text">
                     </div>
 
                     <label class="col-md-1 control-label" for="Nome">Nascimento<h11>*</h11></label>
@@ -30,22 +32,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label" for="prependedtext">Email <h11>*</h11></label>
+                    <label class="col-md-2 control-label" @*asp-for="Email"*@>Email <h11>*</h11></label>
                     <div class="col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                            <input id="prependedtext" name="prependedtext" class="form-control" placeholder="email@email.com"
+                            <input asp-for="Email" class="form-control" placeholder="email@email.com"
                                    required type="text">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label" for="passwrd">Senha <h11>*</h11></label>
+                    <label class="col-md-2 control-label" @*asp-for="Senha"*@>Senha <h11>*</h11></label>
                     <div class="col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                            <input id="passwrd" name="passwrd" class="form-control" placeholder="*******" required type="password">
+                            <input asp-for="Senha" class="form-control" placeholder="*******" required type="password">
                         </div>
                     </div>
                 </div>
@@ -57,9 +59,7 @@
                         <button id="Cancelar" name="Cancelar" class="btn btn-danger" type="Reset">Cancelar</button>
                     </div>
                 </div>
-
-            </form>
+            </form>        
+        </div>
     </div>
-    
 </div>
-  </div>

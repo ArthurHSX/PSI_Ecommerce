@@ -55,7 +55,7 @@ namespace PSI_Ecommerce
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
+                    name: "Home",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(
