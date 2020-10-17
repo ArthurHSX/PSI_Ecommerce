@@ -1,7 +1,7 @@
 ﻿@model Usuario;
 
 <div class="text-center">
-    <form class="form-signin" asp-action="BuscaUsuario" asp-controller="Login" method="get" >
+    <form class="form-signin" asp-action="BuscaUsuario" asp-controller="Login" method="get">
         @*<img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/OLX-Logo.png" alt="" width="72" height="72">*@
         <h1 class="h3 mb-3 font-weight-normal">Efetuar Login</h1>
         <label for="inputEmail" class="sr-only">Usuário</label>
@@ -13,7 +13,9 @@
                 <input type="checkbox" value="remember-me"> Lembre-se de mim
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-        <p class="mt-5 mb-3 text-muted"><a> Cadastre-se </a></p>
+        <button asp-controller="Login" asp-action="BuscaUsuario" id="Logar" class="btn btn-lg btn-primary btn-block" type="Submit">
+            Entrar
+        </button>
+        <p asp-area="" asp-controller="Login" asp-action="CadastraUsuario" class="mt-5 mb-3 text-muted"><a> Cadastre-se </a></p>
     </form>
 </div>
