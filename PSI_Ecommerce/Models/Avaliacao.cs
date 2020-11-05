@@ -11,5 +11,6 @@ namespace PSI_Ecommerce.Models
         public string Descricao { get; set; }
         public string Nota { get; set; }
         public Anuncio anuncio { get; set; }
+        public int AnuncioId { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace PSI_Ecommerce.Models
     {
         public int IdFoto { get; set; }
         public byte[] Imagem { get; set; }
-        public int ID { get; set; }
+        public int AnuncioId { get; set; }
         public Anuncio anuncio { get; set; }
     }
 }

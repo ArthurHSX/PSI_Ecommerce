@@ -13,6 +13,7 @@ namespace PSI_Ecommerce.Models
         public string TituloAnuncio { get; set; }
         public string Descricao { get; set; }
         public double Valor { get; set; }
+        public int UsuarioId { get; set; }
         public Usuario usuario { get; set; }
         // IMPLEMENTAR AS CLASSES BASE
         //public int IDUsuario { get; set; }

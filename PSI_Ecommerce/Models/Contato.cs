@@ -10,6 +10,7 @@ namespace PSI_Ecommerce.Models
         public int IdContato { get; set; }
         public string TelefoneFixo { get; set; }
         public string TelefoneMovel { get; set; }
+        public int UsuarioId { get; set; }
         public Usuario usuario { get; set; }
 
     }
