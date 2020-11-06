@@ -60,11 +60,11 @@ namespace PSI_Ecommerce
 
                 routes.MapRoute(
                     name: "Login",
-                    template: "{controller=Login}/{action=Entrar}/{id?}");
+                    template: "{controller=Usuario}/{action=Entrar}/{id?}");
 
                 routes.MapRoute(
                     name: "Cadastro",
-                    template: "{controller=Login}/{action=Cadastro}/{id?}");
+                    template: "{controller=Usuario}/{action=Cadastro}/{id?}");
             });
         }
     }
