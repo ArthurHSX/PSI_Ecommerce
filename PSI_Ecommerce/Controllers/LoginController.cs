@@ -24,10 +24,14 @@ namespace PSI_Ecommerce.Controllers
                     if (us != null)
                     {
                         return Redirect("https://localhost:44359/Home/Index"); // redirect para a página inicial
+                    } else
+                    {
+                        return null; // retornar mensagem de usuário invalido pra view
                     }
+                } else
+                {
+                    return null;
                 }
-
-                return View(usuario);
             }
             catch (Exception ex)
             {
