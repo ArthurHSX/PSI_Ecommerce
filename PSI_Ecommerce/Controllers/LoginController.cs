@@ -26,7 +26,8 @@ namespace PSI_Ecommerce.Controllers
                         return Redirect("https://localhost:44359/Home/Index"); // redirect para a página inicial
                     } else
                     {
-                        return null; // retornar mensagem de usuário invalido pra view
+                        ModelState.AddModelError("usuario.Invalido", "Credenciais inválidas!");  // retornar mensagem de usuário invalido pra view
+                        return View("Entrar");
                     }
                 } else
                 {
