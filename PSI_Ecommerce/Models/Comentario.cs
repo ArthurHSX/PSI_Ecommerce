@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+
 
 namespace PSI_Ecommerce.Models
 {
     public class Comentario
     {
-        public string Descricao { get; set; }
+        [Key]
         public int IdComentario { get; set; }
-        public int UsuarioId { get; set; }
-        public Usuario usuario { get; set; }
-        public Comentario comentario { get; set; }
-        public int ComentarioId { get; set; }
+        public Usuario Usuario { get; set; }
+        public Anuncio Anuncio { get; set; }
+        public Comentario ComentarioPai { get; set; }
+        public string Descricao { get; set; }
     }
 }

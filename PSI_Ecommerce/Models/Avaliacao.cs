@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PSI_Ecommerce.Models
 {
-    public class Avaliacao : Controller
+    public class Avaliacao
     {
+        [Key]
+        public int IdAvaliacao { get; set; }
+        public Anuncio Anuncio { get; set; }
+        public Usuario Usuario { get; set; }
         public string Descricao { get; set; }
         public string Nota { get; set; }
-        public Anuncio anuncio { get; set; }
-        public int AnuncioId { get; set; }
     }
 }

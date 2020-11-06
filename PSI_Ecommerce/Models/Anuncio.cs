@@ -1,25 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace PSI_Ecommerce.Models
 {
     public class Anuncio
     {
         #region Propriedades
-
-        public int ID { get; set; }
+        [Key]
+        public int IdAnuncio { get; set; }
+        public Usuario Usuario { get; set; }
         public string TituloAnuncio { get; set; }
         public string Descricao { get; set; }
         public double Valor { get; set; }
-        public int UsuarioId { get; set; }
-        public Usuario usuario { get; set; }
-        // IMPLEMENTAR AS CLASSES BASE
-        //public int IDUsuario { get; set; }
-        //public int IDCategoria { get; set; }
-        //public int IDNota { get; set; }
-        //public int IDEndereco { get; set; }
 
         #endregion
 

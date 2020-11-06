@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PSI_Ecommerce.Models;
+using System;
 
 namespace PSI_Ecommerce.Controllers
 {
@@ -15,16 +16,23 @@ namespace PSI_Ecommerce.Controllers
         [HttpGet]
         public IActionResult BuscaUsuario([Bind("Email, Senha")] Usuario usuario)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var us = usuario.BuscaUsuario(usuario);
-                if(us != null)
+                if (ModelState.IsValid)
                 {
-                    return Redirect("https://localhost:44359/Home/Index"); // redirect para a página inicial
+                    var us = usuario.BuscaUsuario(usuario);
+                    if (us != null)
+                    {
+                        return Redirect("https://localhost:44359/Home/Index"); // redirect para a página inicial
+                    }
                 }
-            }
 
-            return View(usuario);
+                return View(usuario);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public IActionResult Cadastro()
@@ -35,15 +43,22 @@ namespace PSI_Ecommerce.Controllers
         [HttpPost]
         public IActionResult CadastraUsuario([Bind("Nome, Username, Email, Senha")] Usuario usuario)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //Persistir as informações do Usuario.
-                usuario.ManterCadastro(usuario);
+                if (ModelState.IsValid)
+                {
+                    //Persistir as informações do Usuario.
+                    usuario.ManterCadastro(usuario);
 
-                return RedirectToAction(nameof(Entrar));
+                    return RedirectToAction(nameof(Entrar));
+                }
+
+                return View(usuario);
             }
-
-            return View(usuario);
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

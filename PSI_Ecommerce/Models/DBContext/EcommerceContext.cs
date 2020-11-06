@@ -15,8 +15,6 @@ namespace PSI_Ecommerce.Context
         public DbSet<Foto> Foto { get; set; }
 
 
-
-
         #endregion
 
         // Adicionar depois o nome do arquivo de conexão do BD no método base("nome...")
