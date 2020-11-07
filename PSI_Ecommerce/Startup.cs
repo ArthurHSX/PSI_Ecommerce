@@ -31,8 +31,9 @@ namespace PSI_Ecommerce
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +66,14 @@ namespace PSI_Ecommerce
                 routes.MapRoute(
                     name: "Cadastro",
                     template: "{controller=Usuario}/{action=Cadastro}/{id?}");
+
+                routes.MapRoute(
+                    name: "Novo",
+                    template: "{controller=Anuncio}/{action=NovoAnuncio}/{id?}");
+                
+                routes.MapRoute(
+                    name: "Editar",
+                    template: "{controller=Anuncio}/{action=Editar}/{id?}");
             });
         }
     }

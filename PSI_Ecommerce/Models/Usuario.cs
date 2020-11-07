@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 
@@ -9,12 +11,13 @@ namespace PSI_Ecommerce.Models
     {
         #region Propriedades
         [Key]
-        public int IdUsuario { get; set; }
+        public int ID { get; set; }
         public string Nome { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
-
+        [NotMapped]
+        public List<Anuncio> ListaAnuncio { get; set; }
         #endregion
 
         #region Métodos

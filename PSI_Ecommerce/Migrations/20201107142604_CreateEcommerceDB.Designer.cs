@@ -10,8 +10,8 @@ using PSI_Ecommerce.Context;
 namespace PSI_Ecommerce.Migrations
 {
     [DbContext(typeof(EcommerceContext))]
-    [Migration("20201106001047_CreateEcommerceBD")]
-    partial class CreateEcommerceBD
+    [Migration("20201107142604_CreateEcommerceDB")]
+    partial class CreateEcommerceDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,89 +29,63 @@ namespace PSI_Ecommerce.Migrations
 
                     b.Property<string>("Descricao");
 
-                    b.Property<string>("TituloAnuncio");
+                    b.Property<int?>("ID");
 
-                    b.Property<int?>("UsuarioIdUsuario");
+                    b.Property<string>("TituloAnuncio");
 
                     b.Property<double>("Valor");
 
                     b.HasKey("IdAnuncio");
 
-                    b.HasIndex("UsuarioIdUsuario");
+                    b.HasIndex("ID");
 
                     b.ToTable("Anuncio");
                 });
 
             modelBuilder.Entity("PSI_Ecommerce.Models.Avaliacao", b =>
                 {
-                    b.Property<int>("IdAvaliacao")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AnuncioIdAnuncio");
+                    b.Property<int>("ID");
 
                     b.Property<string>("Descricao");
 
                     b.Property<string>("Nota");
 
-                    b.Property<int?>("UsuarioIdUsuario");
-
-                    b.HasKey("IdAvaliacao");
-
-                    b.HasIndex("AnuncioIdAnuncio");
-
-                    b.HasIndex("UsuarioIdUsuario");
+                    b.HasKey("ID");
 
                     b.ToTable("Avaliacao");
                 });
 
             modelBuilder.Entity("PSI_Ecommerce.Models.Comentario", b =>
                 {
-                    b.Property<int>("IdComentario")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("ID");
 
-                    b.Property<int?>("AnuncioIdAnuncio");
-
-                    b.Property<int?>("ComentarioPaiIdComentario");
+                    b.Property<int?>("ComentarioPaiID");
 
                     b.Property<string>("Descricao");
 
-                    b.Property<int?>("UsuarioIdUsuario");
+                    b.HasKey("ID");
 
-                    b.HasKey("IdComentario");
-
-                    b.HasIndex("AnuncioIdAnuncio");
-
-                    b.HasIndex("ComentarioPaiIdComentario");
-
-                    b.HasIndex("UsuarioIdUsuario");
+                    b.HasIndex("ComentarioPaiID");
 
                     b.ToTable("Comentario");
                 });
 
             modelBuilder.Entity("PSI_Ecommerce.Models.Contato", b =>
                 {
-                    b.Property<int>("IdContato")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("ID");
 
                     b.Property<string>("TelefoneFixo");
 
                     b.Property<string>("TelefoneMovel");
 
-                    b.Property<int?>("UsuarioIdUsuario");
-
-                    b.HasKey("IdContato");
-
-                    b.HasIndex("UsuarioIdUsuario");
+                    b.HasKey("ID");
 
                     b.ToTable("Contato");
                 });
 
             modelBuilder.Entity("PSI_Ecommerce.Models.Foto", b =>
                 {
-                    b.Property<int>("IdFoto")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -119,20 +93,20 @@ namespace PSI_Ecommerce.Migrations
 
                     b.Property<byte[]>("Imagem");
 
-                    b.Property<int?>("UsuarioIdUsuario");
+                    b.Property<int?>("UsuarioID");
 
-                    b.HasKey("IdFoto");
+                    b.HasKey("ID");
 
                     b.HasIndex("AnuncioIdAnuncio");
 
-                    b.HasIndex("UsuarioIdUsuario");
+                    b.HasIndex("UsuarioID");
 
                     b.ToTable("Foto");
                 });
 
             modelBuilder.Entity("PSI_Ecommerce.Models.Usuario", b =>
                 {
-                    b.Property<int>("IdUsuario")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -144,7 +118,7 @@ namespace PSI_Ecommerce.Migrations
 
                     b.Property<string>("Username");
 
-                    b.HasKey("IdUsuario");
+                    b.HasKey("ID");
 
                     b.ToTable("Usuario");
                 });
@@ -153,40 +127,45 @@ namespace PSI_Ecommerce.Migrations
                 {
                     b.HasOne("PSI_Ecommerce.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioIdUsuario");
+                        .HasForeignKey("ID");
                 });
 
             modelBuilder.Entity("PSI_Ecommerce.Models.Avaliacao", b =>
                 {
-                    b.HasOne("PSI_Ecommerce.Models.Anuncio", "Anuncio")
-                        .WithMany()
-                        .HasForeignKey("AnuncioIdAnuncio");
-
                     b.HasOne("PSI_Ecommerce.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioIdUsuario");
+                        .HasForeignKey("ID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PSI_Ecommerce.Models.Anuncio", "Anuncio")
+                        .WithMany()
+                        .HasForeignKey("ID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PSI_Ecommerce.Models.Comentario", b =>
                 {
-                    b.HasOne("PSI_Ecommerce.Models.Anuncio", "Anuncio")
-                        .WithMany()
-                        .HasForeignKey("AnuncioIdAnuncio");
-
                     b.HasOne("PSI_Ecommerce.Models.Comentario", "ComentarioPai")
                         .WithMany()
-                        .HasForeignKey("ComentarioPaiIdComentario");
+                        .HasForeignKey("ComentarioPaiID");
 
                     b.HasOne("PSI_Ecommerce.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioIdUsuario");
+                        .HasForeignKey("ID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PSI_Ecommerce.Models.Anuncio", "Anuncio")
+                        .WithMany()
+                        .HasForeignKey("ID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PSI_Ecommerce.Models.Contato", b =>
                 {
                     b.HasOne("PSI_Ecommerce.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioIdUsuario");
+                        .HasForeignKey("ID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PSI_Ecommerce.Models.Foto", b =>
@@ -197,7 +176,7 @@ namespace PSI_Ecommerce.Migrations
 
                     b.HasOne("PSI_Ecommerce.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioIdUsuario");
+                        .HasForeignKey("UsuarioID");
                 });
 #pragma warning restore 612, 618
         }
