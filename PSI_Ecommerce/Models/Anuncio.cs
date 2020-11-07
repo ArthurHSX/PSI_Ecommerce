@@ -8,8 +8,8 @@ namespace PSI_Ecommerce.Models
     {
         #region Propriedades
         [Key]
-        public int IdAnuncio { get; set; }
-        [ForeignKey("ID")]
+        public int ID { get; set; }
+        public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
         public string TituloAnuncio { get; set; }
         public string Descricao { get; set; }

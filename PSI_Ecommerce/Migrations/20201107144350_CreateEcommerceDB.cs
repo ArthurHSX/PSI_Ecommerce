@@ -28,48 +28,53 @@ namespace PSI_Ecommerce.Migrations
                 name: "Anuncio",
                 columns: table => new
                 {
-                    IdAnuncio = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ID = table.Column<int>(nullable: true),
+                    UsuarioId = table.Column<int>(nullable: false),
                     TituloAnuncio = table.Column<string>(nullable: true),
                     Descricao = table.Column<string>(nullable: true),
                     Valor = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Anuncio", x => x.IdAnuncio);
+                    table.PrimaryKey("PK_Anuncio", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Anuncio_Usuario_ID",
-                        column: x => x.ID,
+                        name: "FK_Anuncio_Usuario_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuario",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Contato",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     TelefoneFixo = table.Column<string>(nullable: true),
-                    TelefoneMovel = table.Column<string>(nullable: true)
+                    TelefoneMovel = table.Column<string>(nullable: true),
+                    UsuarioId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contato", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Contato_Usuario_ID",
-                        column: x => x.ID,
+                        name: "FK_Contato_Usuario_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuario",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Avaliacao",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AnuncioId = table.Column<int>(nullable: false),
+                    UsuarioId = table.Column<int>(nullable: false),
                     Descricao = table.Column<string>(nullable: true),
                     Nota = table.Column<string>(nullable: true)
                 },
@@ -77,24 +82,27 @@ namespace PSI_Ecommerce.Migrations
                 {
                     table.PrimaryKey("PK_Avaliacao", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Avaliacao_Usuario_ID",
-                        column: x => x.ID,
+                        name: "FK_Avaliacao_Anuncio_AnuncioId",
+                        column: x => x.AnuncioId,
+                        principalTable: "Anuncio",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Avaliacao_Usuario_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuario",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Avaliacao_Anuncio_ID",
-                        column: x => x.ID,
-                        principalTable: "Anuncio",
-                        principalColumn: "IdAnuncio",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Comentario",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false),
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UsuarioId = table.Column<int>(nullable: false),
+                    AnuncioId = table.Column<int>(nullable: false),
                     ComentarioPaiID = table.Column<int>(nullable: true),
                     Descricao = table.Column<string>(nullable: true)
                 },
@@ -102,23 +110,23 @@ namespace PSI_Ecommerce.Migrations
                 {
                     table.PrimaryKey("PK_Comentario", x => x.ID);
                     table.ForeignKey(
+                        name: "FK_Comentario_Anuncio_AnuncioId",
+                        column: x => x.AnuncioId,
+                        principalTable: "Anuncio",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
                         name: "FK_Comentario_Comentario_ComentarioPaiID",
                         column: x => x.ComentarioPaiID,
                         principalTable: "Comentario",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Comentario_Usuario_ID",
-                        column: x => x.ID,
+                        name: "FK_Comentario_Usuario_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuario",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Comentario_Anuncio_ID",
-                        column: x => x.ID,
-                        principalTable: "Anuncio",
-                        principalColumn: "IdAnuncio",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -128,30 +136,45 @@ namespace PSI_Ecommerce.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Imagem = table.Column<byte[]>(nullable: true),
-                    UsuarioID = table.Column<int>(nullable: true),
-                    AnuncioIdAnuncio = table.Column<int>(nullable: true)
+                    UsuarioId = table.Column<int>(nullable: false),
+                    AnuncioId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Foto", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Foto_Anuncio_AnuncioIdAnuncio",
-                        column: x => x.AnuncioIdAnuncio,
+                        name: "FK_Foto_Anuncio_AnuncioId",
+                        column: x => x.AnuncioId,
                         principalTable: "Anuncio",
-                        principalColumn: "IdAnuncio",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_Foto_Usuario_UsuarioID",
-                        column: x => x.UsuarioID,
+                        name: "FK_Foto_Usuario_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuario",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Anuncio_ID",
+                name: "IX_Anuncio_UsuarioId",
                 table: "Anuncio",
-                column: "ID");
+                column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Avaliacao_AnuncioId",
+                table: "Avaliacao",
+                column: "AnuncioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Avaliacao_UsuarioId",
+                table: "Avaliacao",
+                column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comentario_AnuncioId",
+                table: "Comentario",
+                column: "AnuncioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comentario_ComentarioPaiID",
@@ -159,14 +182,24 @@ namespace PSI_Ecommerce.Migrations
                 column: "ComentarioPaiID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Foto_AnuncioIdAnuncio",
-                table: "Foto",
-                column: "AnuncioIdAnuncio");
+                name: "IX_Comentario_UsuarioId",
+                table: "Comentario",
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Foto_UsuarioID",
+                name: "IX_Contato_UsuarioId",
+                table: "Contato",
+                column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Foto_AnuncioId",
                 table: "Foto",
-                column: "UsuarioID");
+                column: "AnuncioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Foto_UsuarioId",
+                table: "Foto",
+                column: "UsuarioId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

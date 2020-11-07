@@ -7,9 +7,9 @@ namespace PSI_Ecommerce.Models
     {
         [Key]
         public int ID { get; set; }
-        [ForeignKey("ID")]
+        public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
-        [ForeignKey("ID")]
+        public int AnuncioId { get; set; }
         public Anuncio Anuncio { get; set; }
         public Comentario ComentarioPai { get; set; }
         public string Descricao { get; set; }

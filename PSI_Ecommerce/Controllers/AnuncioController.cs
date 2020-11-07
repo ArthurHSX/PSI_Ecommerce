@@ -38,7 +38,7 @@ namespace PSI_Ecommerce.Controllers
                 {
                     anuncio.Usuario = new Usuario()
                     {
-                       // IdUsuario = 1,
+                        //ID = 1,
                         Email = "arthurwesley7@gmail.com",
                         Username = "arthurwesley7"
                     };
