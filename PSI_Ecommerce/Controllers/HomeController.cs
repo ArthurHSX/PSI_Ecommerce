@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PSI_Ecommerce.Models;
+using PSI_Ecommerce.Dominio;
 
 namespace PSI_Ecommerce.Controllers
 {

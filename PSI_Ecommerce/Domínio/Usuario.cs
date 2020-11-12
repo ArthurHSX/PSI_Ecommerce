@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 
-namespace PSI_Ecommerce.Models
+namespace PSI_Ecommerce.Dominio
 {
     public class Usuario
     {

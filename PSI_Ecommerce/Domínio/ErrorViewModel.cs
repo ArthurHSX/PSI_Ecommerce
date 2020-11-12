@@ -1,6 +1,6 @@
 using System;
 
-namespace PSI_Ecommerce.Models
+namespace PSI_Ecommerce.Dominio
 {
     public class ErrorViewModel
     {

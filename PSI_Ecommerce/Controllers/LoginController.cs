@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PSI_Ecommerce.Models;
+using PSI_Ecommerce.Dominio;
 using System;
 
 namespace PSI_Ecommerce.Controllers

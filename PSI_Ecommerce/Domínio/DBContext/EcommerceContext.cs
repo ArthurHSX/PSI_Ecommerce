@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PSI_Ecommerce.Models;
+using PSI_Ecommerce.Dominio;
 
 namespace PSI_Ecommerce.Context
 {
