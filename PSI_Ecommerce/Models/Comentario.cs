@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PSI_Ecommerce.Dominio
+namespace PSI_Ecommerce.Models
 {
     public class Comentario
     {

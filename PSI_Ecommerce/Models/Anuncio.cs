@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
-namespace PSI_Ecommerce.Dominio
+namespace PSI_Ecommerce.Models
 {
     public class Anuncio
     {
@@ -40,6 +42,16 @@ namespace PSI_Ecommerce.Dominio
         public void BuscarFotos(int idAnuncio)
         {
             throw new NotImplementedException("Implemmentar método de busca");
+        }
+
+        public IEnumerable<Anuncio> BuscarAnuncios(int idUsuario)
+        {
+            using (var contexto = new Context.EcommerceContext())
+            {
+                return (from an in contexto.Anuncio
+                        where an.UsuarioId == idUsuario
+                        select an).ToList();
+            }
         }
 
         #endregion

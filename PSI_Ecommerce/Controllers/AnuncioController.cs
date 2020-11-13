@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PSI_Ecommerce.Dominio;
+using PSI_Ecommerce.Models;
 
 namespace PSI_Ecommerce.Controllers
 {
@@ -23,9 +23,9 @@ namespace PSI_Ecommerce.Controllers
         }
 
         // GET: AnuncioController/Create
-        public ActionResult NovoAnuncio()
+        public ActionResult NovoAnuncio(Usuario usuario)
         {
-            return View();
+            return View(usuario);
         }
 
         // POST: AnuncioController/Create
