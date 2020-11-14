@@ -1,5 +1,3 @@
-using System;
-
 namespace PSI_Ecommerce.Models
 {
     public class ErrorViewModel

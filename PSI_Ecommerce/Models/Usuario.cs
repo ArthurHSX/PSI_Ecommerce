@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
-
 namespace PSI_Ecommerce.Models
 {
     public class Usuario
@@ -14,6 +13,7 @@ namespace PSI_Ecommerce.Models
         public int ID { get; set; }
         public string Nome { get; set; }
         public string Username { get; set; }
+
         public string Email { get; set; }
         public string Senha { get; set; }
         [NotMapped]
@@ -26,10 +26,9 @@ namespace PSI_Ecommerce.Models
         {
             using (var contexto = new Context.EcommerceContext() )
             {
-                contexto.Add(_usuario);
+                contexto.Usuario.Add(_usuario);
                 contexto.SaveChanges();
-            }
-                
+            }                
         }
 
         public Usuario BuscaUsuario(Usuario usuario)
@@ -59,6 +58,8 @@ namespace PSI_Ecommerce.Models
         {
             throw new Exception("Implemmentar método de busca");
         }
+
+        public void BuscarAnunciosUsuario() => ListaAnuncio = (List<Anuncio>)new Anuncio().BuscarAnuncios(ID);
 
         #endregion
 
