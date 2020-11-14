@@ -14,7 +14,7 @@ namespace PSI_Ecommerce.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
-        public string TituloAnuncio { get; set; }
+        public string Titulo { get; set; }
         public string Descricao { get; set; }
         public double Valor { get; set; }
 
@@ -31,7 +31,7 @@ namespace PSI_Ecommerce.Models
                 {
                     Valor = _anuncio.Valor,
                     Descricao = _anuncio.Descricao,
-                    TituloAnuncio = _anuncio.TituloAnuncio,
+                    Titulo = _anuncio.Titulo,
                     Usuario = _anuncio.Usuario,
                     UsuarioId = 5
                 });

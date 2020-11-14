@@ -12,17 +12,16 @@ namespace PSI_Ecommerce.Controllers
         }
 
         [HttpGet]
-        public IActionResult BuscaUsuario([Bind("Email, Senha")] Usuario usuario)
+        public IActionResult BuscaUsuario([Bind("Email, Senha")] Usuario vwUsuario)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var us = usuario.BuscaUsuario(usuario);
+                    var us = vwUsuario.BuscaUsuario(vwUsuario);
                     if (us != null)
                     {
-                        return RedirectToAction("Index", "Anuncio", usuario);
-                        //return Redirect("https://localhost:44359/Home/Index"); // redirect para a página inicial
+                        return RedirectToAction("Index", "Anuncio", us);
                     } else
                     {
                         ModelState.AddModelError("usuario.Invalido", "Credenciais inválidas!");  // retornar mensagem de usuário invalido pra view

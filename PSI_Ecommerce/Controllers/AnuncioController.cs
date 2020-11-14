@@ -11,12 +11,11 @@ namespace PSI_Ecommerce.Controllers
     public class AnuncioController : Controller
     {
         // GET: AnuncioController
-        public ActionResult Index(Usuario usuario)
+        [HttpGet("{id}")]
+        public ActionResult Index(Usuario vwUsuario)
         {
             try
             {
-                usuario.BuscarAnunciosUsuario();
-
                 //if (usuario.ListaAnuncio != null)
                 //    return View("MeusAnuncios", usuario);
                 //else
@@ -24,7 +23,7 @@ namespace PSI_Ecommerce.Controllers
                 //    return View();
                 //}
 
-                return RedirectToAction("MeusAnuncios", usuario);
+                return RedirectToAction("MeusAnuncios", vwUsuario);
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);
@@ -45,17 +44,19 @@ namespace PSI_Ecommerce.Controllers
         }
 
         // GET: AnuncioController/MeusAnuncios
-        public ActionResult MeusAnuncios(Usuario usuario)
+        public ActionResult MeusAnuncios(Usuario vwUsuario)
         {
-            usuario.BuscarAnunciosUsuario();
+            vwUsuario.BuscarAnunciosUsuario();
             Anuncio anuncio = new Anuncio()
             {
-                Usuario = usuario,
-                UsuarioId = usuario.ID
+                Usuario = vwUsuario,                
+                UsuarioId = vwUsuario.ID,
+
             };
 
-
-            return View(anuncio);
+            ViewBag.Message = anuncio.Usuario;
+            
+            return View();
         }
 
         // POST: AnuncioController/Create

@@ -69,7 +69,7 @@ namespace PSI_Ecommerce
 
                 routes.MapRoute(
                     name: "Anuncios",
-                    template: "{controller=Anuncio}/{action=Index}/{id?}");
+                    template: "{controller=Anuncio}/{action=Index}/");
 
                 routes.MapRoute(
                     name: "Novo",

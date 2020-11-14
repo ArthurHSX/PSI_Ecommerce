@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\NovaPasta\**" />
     <Compile Remove="Views\co\**" />
+    <Content Remove="Migrations\NovaPasta\**" />
     <Content Remove="Views\co\**" />
+    <EmbeddedResource Remove="Migrations\NovaPasta\**" />
     <EmbeddedResource Remove="Views\co\**" />
+    <None Remove="Migrations\NovaPasta\**" />
     <None Remove="Views\co\**" />
   </ItemGroup>
 
@@ -26,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\NovaPasta\" />
     <Folder Include="Views\Usuario\" />
   </ItemGroup>
 

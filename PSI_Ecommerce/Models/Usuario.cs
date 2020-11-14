@@ -13,7 +13,6 @@ namespace PSI_Ecommerce.Models
         public int ID { get; set; }
         public string Nome { get; set; }
         public string Username { get; set; }
-
         public string Email { get; set; }
         public string Senha { get; set; }
         [NotMapped]
@@ -21,6 +20,15 @@ namespace PSI_Ecommerce.Models
         #endregion
 
         #region Métodos
+
+        public Usuario()
+        { }
+
+        public Usuario(int _usuarioId)
+        {
+            this.BuscaUsuario(_usuarioId);
+            this.BuscarAnunciosUsuario();
+        }
 
         public void ManterCadastro(Usuario _usuario)
         {
@@ -31,27 +39,40 @@ namespace PSI_Ecommerce.Models
             }                
         }
 
-        public Usuario BuscaUsuario(Usuario usuario)
+        public Usuario BuscaUsuario(Usuario _usuario)
         {
-            if(String.IsNullOrEmpty(usuario.Username) && String.IsNullOrEmpty(usuario.Email))
+            if(String.IsNullOrEmpty(_usuario.Username) && String.IsNullOrEmpty(_usuario.Email))
             { return null; }
 
             using (var contexto = new Context.EcommerceContext())
             {
-                if (String.IsNullOrEmpty(usuario.Username))
+                if (String.IsNullOrEmpty(_usuario.Username))
                 {
                     return (from us in contexto.Usuario
-                            where us.Email == usuario.Email
+                            where us.Email == _usuario.Email
                             select us).FirstOrDefault();
                 }
-                else if (String.IsNullOrEmpty(usuario.Email))
+                else if (String.IsNullOrEmpty(_usuario.Email))
                 {
                     return (from us in contexto.Usuario
-                            where us.Username == usuario.Username
+                            where us.Username == _usuario.Username
                             select us).FirstOrDefault();
                 }
             }
             return null;
+        }
+
+        public Usuario BuscaUsuario(int _id)
+        {
+            if (_id <= 0)
+            { return null; }
+
+            using (var contexto = new Context.EcommerceContext())
+            {
+                return (from us in contexto.Usuario
+                        where us.ID == _id
+                        select us).FirstOrDefault();
+            }
         }
 
         public void BuscarContatos()
