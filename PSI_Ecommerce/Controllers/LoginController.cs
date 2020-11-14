@@ -6,9 +6,9 @@ namespace PSI_Ecommerce.Controllers
 {
     public class LoginController : Controller
     {
-        public IActionResult Entrar(Usuario usuario)
+        public IActionResult Entrar()
         {
-            return View(usuario);
+            return View();
         }
 
         [HttpGet]
@@ -21,7 +21,7 @@ namespace PSI_Ecommerce.Controllers
                     var us = usuario.BuscaUsuario(usuario);
                     if (us != null)
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Anuncio", usuario);
                         //return Redirect("https://localhost:44359/Home/Index"); // redirect para a página inicial
                     } else
                     {
