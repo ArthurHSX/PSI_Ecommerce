@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace PSI_Ecommerce.Models
 {
@@ -10,6 +11,7 @@ namespace PSI_Ecommerce.Models
         #region Propriedades
         [Key]
         public int ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
         public string TituloAnuncio { get; set; }
@@ -24,7 +26,15 @@ namespace PSI_Ecommerce.Models
         {
             using (var contexto = new Context.EcommerceContext())
             {
-                contexto.Anuncio.Add(_anuncio);
+                //contexto.Anuncio.Add(_anuncio);
+                contexto.Anuncio.Add(new Anuncio()
+                {
+                    Valor = _anuncio.Valor,
+                    Descricao = _anuncio.Descricao,
+                    TituloAnuncio = _anuncio.TituloAnuncio,
+                    Usuario = _anuncio.Usuario,
+                    UsuarioId = 5
+                });
                 contexto.SaveChanges();
             }
         }
@@ -34,33 +44,16 @@ namespace PSI_Ecommerce.Models
             throw new NotImplementedException("Implemmentar método de busca");
         }
 
-        public List<Anuncio> ListarAnuncios()
+        public IEnumerable<Anuncio> BuscarAnuncios(int idUsuario)
         {
-            List<Anuncio> listaAnuncio = new List<Anuncio>();
-
-            //using (var contexto = new Context.EcommerceContext())
-            //{
-            for (int i = 130; i < 140; i++)
+            using (var contexto = new Context.EcommerceContext())
             {
-                listaAnuncio.Add(CriarAnuncio(i));
-
+                return (from an in contexto.Anuncio
+                        where an.UsuarioId == idUsuario
+                        select an).ToList();
             }
-                // contexto.SaveChanges();
-            
-            // }
-
-            return listaAnuncio;
-
         }
 
-        public Anuncio CriarAnuncio(int i)
-        {
-            Anuncio temp = new Anuncio();
-            temp.ID = i;
-            temp.Descricao = "Descrição Teste Anuncio Número " + i;
-            temp.TituloAnuncio = "Titulo Anuncio " + i;
-            temp.Usuario = 
-        }
         #endregion
     }
 }

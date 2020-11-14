@@ -38,9 +38,9 @@ namespace PSI_Ecommerce.Controllers
         }
 
         // GET: AnuncioController/Create
-        public ActionResult NovoAnuncio()
+        public ActionResult NovoAnuncio(Usuario usuario)
         {
-            return View();
+            return View(usuario);
         }
 
         // POST: AnuncioController/Create
@@ -55,7 +55,7 @@ namespace PSI_Ecommerce.Controllers
                     // Receber usuario
                     anuncio.Usuario = new Usuario()
                     {
-                        //ID = 1,
+                        ID = 5,
                         Email = "arthurwesley7@gmail.com",
                         Username = "arthurwesley7"
                     };

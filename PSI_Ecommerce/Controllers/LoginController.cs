@@ -6,10 +6,8 @@ namespace PSI_Ecommerce.Controllers
 {
     public class LoginController : Controller
     {
-        public IActionResult Entrar()
+        public IActionResult Entrar(Usuario usuario)
         {
-            Usuario usuario = new Usuario();
-
             return View(usuario);
         }
 
@@ -23,7 +21,8 @@ namespace PSI_Ecommerce.Controllers
                     var us = usuario.BuscaUsuario(usuario);
                     if (us != null)
                     {
-                        return Redirect("https://localhost:44359/Home/Index"); // redirect para a página inicial
+                        return RedirectToAction("Index", "Home");
+                        //return Redirect("https://localhost:44359/Home/Index"); // redirect para a página inicial
                     } else
                     {
                         ModelState.AddModelError("usuario.Invalido", "Credenciais inválidas!");  // retornar mensagem de usuário invalido pra view
@@ -55,13 +54,14 @@ namespace PSI_Ecommerce.Controllers
                     //Persistir as informações do Usuario.
                     usuario.ManterCadastro(usuario);
 
-                    return RedirectToAction(nameof(Entrar));
+                    return RedirectToAction("MeusAnuncios", "Usuario", usuario);
                 }
 
                 return View(usuario);
             }
             catch (Exception ex)
             {
+                ModelState.AddModelError("usuario.Invalido", "Credenciais inválidas!");  // retornar mensagem de usuário invalido pra view
                 return null;
             }
         }
