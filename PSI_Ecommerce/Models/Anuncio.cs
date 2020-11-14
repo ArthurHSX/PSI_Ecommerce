@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -33,6 +34,33 @@ namespace PSI_Ecommerce.Models
             throw new NotImplementedException("Implemmentar método de busca");
         }
 
+        public List<Anuncio> ListarAnuncios()
+        {
+            List<Anuncio> listaAnuncio = new List<Anuncio>();
+
+            //using (var contexto = new Context.EcommerceContext())
+            //{
+            for (int i = 130; i < 140; i++)
+            {
+                listaAnuncio.Add(CriarAnuncio(i));
+
+            }
+                // contexto.SaveChanges();
+            
+            // }
+
+            return listaAnuncio;
+
+        }
+
+        public Anuncio CriarAnuncio(int i)
+        {
+            Anuncio temp = new Anuncio();
+            temp.ID = i;
+            temp.Descricao = "Descrição Teste Anuncio Número " + i;
+            temp.TituloAnuncio = "Titulo Anuncio " + i;
+            temp.Usuario = 
+        }
         #endregion
     }
 }

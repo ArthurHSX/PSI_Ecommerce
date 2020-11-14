@@ -13,7 +13,22 @@ namespace PSI_Ecommerce.Controllers
         // GET: AnuncioController
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                Anuncio anuncio = new Anuncio();
+                List<Anuncio> lista = new List<Anuncio>();
+                lista = anuncio.ListarAnuncios();
+                if (lista != null)
+                    return View("MeusAnuncios");
+                else
+                {
+                    return View();
+                }
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+                return View("MeusAnuncios");
+            }
         }
 
         // GET: AnuncioController/Details/5
@@ -30,12 +45,14 @@ namespace PSI_Ecommerce.Controllers
 
         // POST: AnuncioController/Create
         [HttpPost]
-        public ActionResult Create([Bind("TituloAnuncio, Descricao, Valor, Senha")] Anuncio anuncio)
+        public ActionResult Create([Bind("TituloAnuncio, Descricao, Valor, Senha")] Anuncio anuncio, Usuario usuario)
         {
+            // Redireciona para login
             try
             {
                 if (ModelState.IsValid)
                 {
+                    // Receber usuario
                     anuncio.Usuario = new Usuario()
                     {
                         //ID = 1,

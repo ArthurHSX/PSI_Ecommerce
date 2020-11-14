@@ -12,9 +12,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Anuncio\Anuncio.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Anuncio\Anuncio.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\NovaPasta\" />
+    <Folder Include="Views\Usuario\" />
   </ItemGroup>
 
 </Project>
