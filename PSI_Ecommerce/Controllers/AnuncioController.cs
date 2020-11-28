@@ -31,9 +31,9 @@ namespace PSI_Ecommerce.Controllers
         }
 
         // GET: AnuncioController/Create
-        public ActionResult NovoAnuncio(Usuario usuario)
+        public ActionResult NovoAnuncio([ViewData()])
         {
-            return View(usuario);
+            return View(vwUsuario);
         }
 
         // GET: AnuncioController/MeusAnuncios
@@ -49,7 +49,7 @@ namespace PSI_Ecommerce.Controllers
 
             ViewBag.Message = anuncio.Usuario;
             
-            return View("MeusAnuncios", vwUsuario);
+            return View("MeusAnuncios");
         }
 
         // POST: AnuncioController/Create

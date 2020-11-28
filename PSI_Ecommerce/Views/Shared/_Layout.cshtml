@@ -49,8 +49,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Anuncio" asp-action="Index">Anuncios</a></li>
+                    <li><a asp-area="" asp-controller="Anuncio" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Login" asp-action="Entrar">Meus Anuncios</a></li>                    
                 </ul>
             </div>
         </div>
@@ -60,9 +60,9 @@
 
     <div class="container body-content">
         @RenderBody()
-        <footer class="footer">
+        @*<footer class="footer">
             <p>&copy; 2020 - PSI_Ecommerce</p>
-        </footer>
+        </footer>*@
     </div>
 
     <environment include="Development">

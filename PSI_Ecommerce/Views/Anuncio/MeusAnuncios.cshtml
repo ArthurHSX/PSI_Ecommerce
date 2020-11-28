@@ -1,57 +1,64 @@
 ﻿@model PSI_Ecommerce.Models.Anuncio
 
-@{ 
+@{
     ViewBag.Title = "MeusAnuncios";
 }
-@{ 
+@{
     Usuario usuario = ViewBag.Message;
 }
 
-<main class="l-main">
-    <div class="content-wrapper content-wrapper--with-bg">
-        @if (usuario.ListaAnuncio.Count > 0)
-        {
-            <div class="list-group">
-                @foreach (var anuncio in usuario.ListaAnuncio)
-                {
-                    <a href="#" class="list-group-item">
-                        <div class="media col-md-3">
-                            <figure class="pull-left">
-                                <img class="media-object img-rounded img-responsive" src="http://placehold.it/140x100" alt="placehold.it/140x100">
-                            </figure>
-                        </div>
-                        <div class="col-md-5">
-                            <h4 class="list-group-item-heading pb-3"> @anuncio.TituloAnuncio </h4>
-                            <p class="list-group-item-text"> @anuncio.Descricao </p>
-                        </div>
-                        <div class="col-md-3 pull-left">
-                            <div class="container col-md-12">
-                                <div class="row">
-                                    <div class="co-md-12 pull-left">
-                                        <label for="nrTelefoneFixo"> Telefone Fixo </label>
+
+<div class="w3-content" style="max-width:1500px">
+    <button asp-controller="Anuncio" asp-action="NovoAnuncio" id="NovoAnuncio" class="btn btn-lg btn-primary btn-block" type="Submit">
+        Novo Anuncio
+    </button>
+    <p></p><p></p><p></p><p></p><p></p>
+    <main class="w3-content">
+        <div class="content-wrapper content-wrapper--with-bg">
+            @if (usuario.ListaAnuncio.Count > 0)
+            {
+                <div class="list-group">
+                    @foreach (var anuncio in usuario.ListaAnuncio)
+                    {
+                        <a href="#" class="list-group-item">
+                            <div class="media col-md-3">
+                                <figure class="pull-left">
+                                    <img class="media-object img-rounded img-responsive" src="http://placehold.it/140x100" alt="placehold.it/140x100">
+                                </figure>
+                            </div>
+                            <div class="col-md-5">
+                                <h4 class="list-group-item-heading pb-3"> @anuncio.TituloAnuncio </h4>
+                                <p class="list-group-item-text"> @anuncio.Descricao </p>
+                            </div>
+                            <div class="col-md-3 pull-left">
+                                <div class="container col-md-12">
+                                    <div class="row">
+                                        <div class="co-md-12 pull-left">
+                                            <label for="nrTelefoneFixo"> Telefone Fixo </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="co-md-12 pull-left">
-                                        <label for="nrTelefoneCelular"> Telefone Celular </label>
+                                    <div class="row">
+                                        <div class="co-md-12 pull-left">
+                                            <label for="nrTelefoneCelular"> Telefone Celular </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="co-md-12 pull-left">
-                                        <label for="nmContato"> @anuncio.Usuario.Nome </label>
+                                    <div class="row">
+                                        <div class="co-md-12 pull-left">
+                                            <label for="nmContato"> @usuario.Nome </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-1 text-center">
-                           <p><small> Excluir Anuncio </small></p>
-                           <button type="button" class="btn btn-primary btn-sm btn-block">Open</button>
-                        </div>
-                    </a>
-                }
+                            <div class="col-md-1 text-center">
+                                <p><small> Excluir Anuncio </small></p>
+                                <button type="button" class="btn btn-primary btn-sm btn-block">Editar</button>
+                            </div>
+                        </a>
+                    }
 
-            </div>
-        }
-            
-     </div>
-</main>
+                </div>
+            }
+
+        </div>
+    </main>
+</div>

@@ -21,17 +21,19 @@ namespace PSI_Ecommerce.Controllers
                     var us = vwUsuario.BuscaUsuario(vwUsuario);
                     if (us != null)
                     {
+                        //return RedirectToAction("MeusAnuncios", "Anuncio", us);
+                        //return RedirectToRoute("MeusAnuncios", us);
                         return RedirectToAction("MeusAnuncios", "Anuncio", us);
-                    } else
+                    }
+                    else
                     {
-                        ModelState.AddModelError("usuario.Invalido", "Credenciais inválidas!");  // retornar mensagem de usuário invalido pra view
-                        return View("Entrar");
+                        ModelState.AddModelError("usuario.Invalido", "Credenciais inválidas!");  // retornar mensagem de usuário invalido pra view                        
                     }
                 } else
                 {
                     ModelState.AddModelError("usuario.Invalido", "Não foi possível fazer a busca de usuário");  // retornar mensagem de usuário invalido pra view
-                    return View("Entrar");
                 }
+                return View("Entrar");
             }
             catch (Exception ex)
             {

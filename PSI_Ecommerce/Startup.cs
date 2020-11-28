@@ -51,13 +51,13 @@ namespace PSI_Ecommerce
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "Home",
-                    template: "{controller=Home}/{action=Index}");
+                    template: "{controller=Anuncio}/{action=Anuncios}");
 
                 routes.MapRoute(
                     name: "Login",
