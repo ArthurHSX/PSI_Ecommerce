@@ -21,7 +21,7 @@ namespace PSI_Ecommerce.Controllers
                     var us = vwUsuario.BuscaUsuario(vwUsuario);
                     if (us != null)
                     {
-                        return RedirectToAction("Index", "Anuncio", us);
+                        return RedirectToAction("MeusAnuncios", "Anuncio", us);
                     } else
                     {
                         ModelState.AddModelError("usuario.Invalido", "Credenciais inválidas!");  // retornar mensagem de usuário invalido pra view
@@ -29,12 +29,13 @@ namespace PSI_Ecommerce.Controllers
                     }
                 } else
                 {
-                    return null;
+                    ModelState.AddModelError("usuario.Invalido", "Não foi possível fazer a busca de usuário");  // retornar mensagem de usuário invalido pra view
+                    return View("Entrar");
                 }
             }
             catch (Exception ex)
             {
-                return null;
+                return View("Entrar");
             }
         }
 
@@ -53,14 +54,14 @@ namespace PSI_Ecommerce.Controllers
                     //Persistir as informações do Usuario.
                     usuario.ManterCadastro(usuario);
 
-                    return RedirectToAction("MeusAnuncios", "Usuario", usuario);
+                    return RedirectToAction("MeusAnuncios", "Anuncio", usuario);
                 }
 
                 return View(usuario);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("usuario.Invalido", "Credenciais inválidas!");  // retornar mensagem de usuário invalido pra view
+                ModelState.AddModelError("usuario.Invalido", "Não foi possível fazer o cadastro do usuário");  // retornar mensagem de usuário invalido pra view
                 return null;
             }
         }

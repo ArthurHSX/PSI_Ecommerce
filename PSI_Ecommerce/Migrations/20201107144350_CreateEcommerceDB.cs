@@ -31,7 +31,7 @@ namespace PSI_Ecommerce.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UsuarioId = table.Column<int>(nullable: false),
-                    Titulo = table.Column<string>(nullable: true),
+                    TituloAnuncio = table.Column<string>(nullable: true),
                     Descricao = table.Column<string>(nullable: true),
                     Valor = table.Column<double>(nullable: false)
                 },

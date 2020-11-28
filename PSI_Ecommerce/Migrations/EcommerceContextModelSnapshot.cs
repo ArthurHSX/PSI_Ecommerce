@@ -27,7 +27,7 @@ namespace PSI_Ecommerce.Migrations
 
                     b.Property<string>("Descricao");
 
-                    b.Property<string>("Titulo");
+                    b.Property<string>("TituloAnuncio");
 
                     b.Property<int>("UsuarioId");
 

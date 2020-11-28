@@ -57,27 +57,27 @@ namespace PSI_Ecommerce
             {
                 routes.MapRoute(
                     name: "Home",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}");
 
                 routes.MapRoute(
                     name: "Login",
-                    template: "{controller=Usuario}/{action=Entrar}/{id?}");
+                    template: "{controller=Usuario}/{action=Entrar}");
 
                 routes.MapRoute(
                     name: "Cadastro",
-                    template: "{controller=Usuario}/{action=Cadastro}/{id?}");
+                    template: "{controller=Usuario}/{action=Cadastro}");
 
                 routes.MapRoute(
-                    name: "Anuncios",
-                    template: "{controller=Anuncio}/{action=Index}/");
+                    name: "Anuncio",
+                    template: "{controller=Anuncio}/{action=Index}");
 
                 routes.MapRoute(
                     name: "Novo",
-                    template: "{controller=Anuncio}/{action=NovoAnuncio}/{id?}");
+                    template: "{controller=Anuncio}/{action=NovoAnuncio}");
                 
                 routes.MapRoute(
-                    name: "Editar",
-                    template: "{controller=Anuncio}/{action=Editar}/{id?}");
+                    name: "MeusAnuncios",
+                    template: "{controller=Anuncio}/{action=MeusAnuncios}");
             });
         }
     }

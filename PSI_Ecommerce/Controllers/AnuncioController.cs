@@ -11,7 +11,7 @@ namespace PSI_Ecommerce.Controllers
     public class AnuncioController : Controller
     {
         // GET: AnuncioController
-        [HttpGet("{id}")]
+        [HttpGet]
         public ActionResult Index(Usuario vwUsuario)
         {
             try
@@ -23,7 +23,7 @@ namespace PSI_Ecommerce.Controllers
                 //    return View();
                 //}
 
-                return RedirectToAction("MeusAnuncios", vwUsuario);
+                return View();
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);
@@ -61,23 +61,16 @@ namespace PSI_Ecommerce.Controllers
 
         // POST: AnuncioController/Create
         [HttpPost]
-        public ActionResult Create([Bind("TituloAnuncio, Descricao, Valor, Senha")] Anuncio anuncio, Usuario usuario)
+        public ActionResult Create([Bind("TituloAnuncio, Descricao, Valor, Senha")] Anuncio anuncio)
         {
             // Redireciona para login
             try
             {
                 if (ModelState.IsValid)
-                {
-                    // Receber usuario
-                    anuncio.Usuario = new Usuario()
-                    {
-                        ID = 5,
-                        Email = "arthurwesley7@gmail.com",
-                        Username = "arthurwesley7"
-                    };
+                {                   
                     anuncio.ManterAnuncio(anuncio);
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(MeusAnuncios), "Anuncio");
             }
             catch (Exception ex)
             {

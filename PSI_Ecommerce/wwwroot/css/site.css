@@ -78,13 +78,13 @@ body {
     white-space: nowrap;
 }
 
-
+/*
 body {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     background-color: #f0f3f5;
     margin-top: 40px;
-}
+}*/
 /*==============================*/
 /*====== Recently connected  heading =====*/
 /*==============================*/
@@ -183,21 +183,6 @@ body {
     padding-right: 10px;
 }
 
-
-html, body {
-    height: 100%;
-    width: 100%;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Open Sans";
-    font-size: 14px;
-    font-weight: 400;
-    background-color: #ececec;
-    color: #102c58;
-}
 
 * {
     -webkit-box-sizing: border-box;
@@ -654,10 +639,10 @@ main.l-main {
     transition: padding 0.5s ease-in-out;
 }
 
-main.l-main .content-wrapper {
+/*main.l-main .content-wrapper {
     padding: 25px;
     height: 100%;
-}
+}*/
 
 main.l-main .content-wrapper .page-content {
     border-top: 1px solid #d0d0d0;
@@ -688,4 +673,76 @@ a.list-group-item {
 
 a.list-group-item.active small {
     color: #fff;
+}
+
+
+/* Sidebar */
+
+.mq-branding {
+    width: 100%;
+    height: 70px;
+    background: rgb(0, 153, 255);
+    display: table;
+    position: relative;
+}
+
+.mq-branding h3::first-letter {
+    color: #2d2d2d;
+    font-weight: 900;
+    font-size: 42pt;
+}
+
+.mq-branding h3 {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* Sidebar end */
+
+/* Body container */
+
+.mq-container {
+    width: 70%;
+    height: 100%;
+    position: absolute;
+    left: 30%;
+    float: right;
+    background-color: #313131;
+}
+
+.mq-bread-crumbs {
+    width: 100%;
+    height: 70px;
+    border-bottom: 1px solid #212121;
+    margin-bottom: 10px;
+    position: relative;
+    display: table;
+}
+
+.mq-bread-crumbs ul {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.mq-bread-crumbs li,
+.mq-bread-crumbs a {
+    display: inline;
+    padding-right: 10px;
+    font-size: 8pt;
+    color: #fff;
+}
+
+.mq-service-box {
+    width: 31.9%;
+    height: 250px;
+    background: #1c1c1c;
+    margin: 0px 0px 10px 10px;
+    float: left;
+}
+
+.mq-box-header {
+    width: 100%;
+    height: 40px;
+    background-color: #212121;
 }
