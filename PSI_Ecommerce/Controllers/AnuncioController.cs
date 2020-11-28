@@ -11,23 +11,16 @@ namespace PSI_Ecommerce.Controllers
     public class AnuncioController : Controller
     {
         // GET: AnuncioController
-        [HttpGet("{id}")]
-        public ActionResult Index(Usuario vwUsuario)
+        [HttpGet("")]
+        public ActionResult Index()
         {
             try
             {
-                //if (usuario.ListaAnuncio != null)
-                //    return View("MeusAnuncios", usuario);
-                //else
-                //{
-                //    return View();
-                //}
-
-                return RedirectToAction("MeusAnuncios", vwUsuario);
+                return View("Anuncios", GetAnunciosMock());
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);
-                return View("MeusAnuncios");
+                return View("Anuncios", GetAnunciosMock());
             }
         }
 
@@ -56,7 +49,7 @@ namespace PSI_Ecommerce.Controllers
 
             ViewBag.Message = anuncio.Usuario;
             
-            return View();
+            return View("MeusAnuncios", vwUsuario);
         }
 
         // POST: AnuncioController/Create
@@ -126,5 +119,32 @@ namespace PSI_Ecommerce.Controllers
                 return View();
             }
         }
+
+        public List<Anuncio> GetAnunciosMock()
+        {
+            Anuncio anuncio = new Anuncio();
+            List<Anuncio> anunciosList = new List<Anuncio>();
+
+            if (anuncio.BuscarAnuncios() == null)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Anuncio an = new Anuncio();
+                    an.ID = i + 310;
+                    an.Titulo = "Título Anuncio " + i;
+                    an.UsuarioId = 5;
+                    an.Valor = 100 * i;
+                    an.Descricao = "Descrição Anuncio " + i;
+                    anunciosList.Add(an);
+                }
+            }
+            else
+            {
+                anunciosList = anuncio.BuscarAnuncios();
+            }
+
+            return anunciosList;
+        }
+
     }
 }
