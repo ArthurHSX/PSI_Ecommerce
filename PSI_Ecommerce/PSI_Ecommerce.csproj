@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Compile Remove="Views\Anuncio\Anuncio.cshtml.cs" />
+    <Compile Remove="Views\Anuncio\Anuncios.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>

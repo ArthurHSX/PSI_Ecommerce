@@ -11,23 +11,16 @@ namespace PSI_Ecommerce.Controllers
     public class AnuncioController : Controller
     {
         // GET: AnuncioController
-        [HttpGet]
-        public ActionResult Index(Usuario vwUsuario)
+        [HttpGet("")]
+        public ActionResult Index()
         {
             try
             {
-                //if (usuario.ListaAnuncio != null)
-                //    return View("MeusAnuncios", usuario);
-                //else
-                //{
-                //    return View();
-                //}
-
-                return View();
+                return View("Anuncios", GetAnunciosMock());
             }
             catch (Exception ex) {
                 Console.WriteLine(ex);
-                return View("MeusAnuncios");
+                return View("Anuncios", GetAnunciosMock());
             }
         }
 
@@ -56,21 +49,28 @@ namespace PSI_Ecommerce.Controllers
 
             ViewBag.Message = anuncio.Usuario;
             
-            return View();
+            return View("MeusAnuncios", vwUsuario);
         }
 
         // POST: AnuncioController/Create
         [HttpPost]
-        public ActionResult Create([Bind("TituloAnuncio, Descricao, Valor, Senha")] Anuncio anuncio)
+        public ActionResult Create([Bind("TituloAnuncio, Descricao, Valor, Senha")] Anuncio anuncio, Usuario usuario)
         {
             // Redireciona para login
             try
             {
                 if (ModelState.IsValid)
-                {                   
+                {
+                    // Receber usuario
+                    anuncio.Usuario = new Usuario()
+                    {
+                        ID = 5,
+                        Email = "arthurwesley7@gmail.com",
+                        Username = "arthurwesley7"
+                    };
                     anuncio.ManterAnuncio(anuncio);
                 }
-                return RedirectToAction(nameof(MeusAnuncios), "Anuncio");
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
@@ -119,5 +119,32 @@ namespace PSI_Ecommerce.Controllers
                 return View();
             }
         }
+
+        public List<Anuncio> GetAnunciosMock()
+        {
+            Anuncio anuncio = new Anuncio();
+            List<Anuncio> anunciosList = new List<Anuncio>();
+
+            if (anuncio.BuscarAnuncios() == null)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Anuncio an = new Anuncio();
+                    an.ID = i + 310;
+                    an.Titulo = "Título Anuncio " + i;
+                    an.UsuarioId = 5;
+                    an.Valor = 100 * i;
+                    an.Descricao = "Descrição Anuncio " + i;
+                    anunciosList.Add(an);
+                }
+            }
+            else
+            {
+                anunciosList = anuncio.BuscarAnuncios();
+            }
+
+            return anunciosList;
+        }
+
     }
 }

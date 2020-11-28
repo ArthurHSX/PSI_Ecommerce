@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PSI_Ecommerce.Context;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,6 +22,19 @@ namespace PSI_Ecommerce.Models
         #endregion
 
         #region Métodos
+
+        public EcommerceContext GetAnuncio()
+        {
+            var contexto = new Context.EcommerceContext();
+            if (contexto != null)
+            {
+                return contexto;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         public void ManterAnuncio(Anuncio _anuncio)
         {
@@ -46,14 +60,40 @@ namespace PSI_Ecommerce.Models
 
         public IEnumerable<Anuncio> BuscarAnuncios(int idUsuario)
         {
-            using (var contexto = new Context.EcommerceContext())
+            var contexto = new Context.EcommerceContext();
+            try
             {
-                return (from an in contexto.Anuncio
-                        where an.UsuarioId == idUsuario
-                        select an).ToList();
+                using (contexto)
+                {
+                    return (from an in contexto.Anuncio
+                            where an.UsuarioId == idUsuario
+                            select an).ToList();
+                }
+
+            }
+            catch (Exception)
+            { 
+                return null; 
             }
         }
 
+        public List<Anuncio> BuscarAnuncios()
+        {
+            var contexto = new Context.EcommerceContext();
+            try
+            {
+                using (contexto)
+                {
+                    return (from an in contexto.Anuncio
+                            select an).ToList();
+                }
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         #endregion
     }
 }
