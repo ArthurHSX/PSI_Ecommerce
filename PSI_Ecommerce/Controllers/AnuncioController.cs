@@ -131,7 +131,7 @@ namespace PSI_Ecommerce.Controllers
                 {
                     Anuncio an = new Anuncio();
                     an.ID = i + 310;
-                    an.Titulo = "Título Anuncio " + i;
+                    an.TituloAnuncio = "Título Anuncio " + i;
                     an.UsuarioId = 5;
                     an.Valor = 100 * i;
                     an.Descricao = "Descrição Anuncio " + i;
