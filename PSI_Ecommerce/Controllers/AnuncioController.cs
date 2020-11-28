@@ -49,7 +49,7 @@ namespace PSI_Ecommerce.Controllers
 
             ViewBag.Message = anuncio.Usuario;
             
-            return View("MeusAnuncios", vwUsuario);
+            return View("MeusAnuncios");
         }
 
         // POST: AnuncioController/Create
