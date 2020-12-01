@@ -10,13 +10,11 @@
 
 
 <div class="w3-content" style="max-width:1500px">
-    <header>
-        <button asp-controller="Anuncio" asp-action="NovoAnuncio" id="NovoAnuncio" class="btn btn-lg btn-primary btn-block" type="Submit">
-            Novo Anuncio
-        </button>
-    </header>>
-    <p></p><p></p><p></p><p></p><p></p>
-    <main class="w3-content">
+    <br />
+    @*<a asp-area="" asp-controller="Anuncio" asp-action="NovoAnuncio" class="btn btn-lg btn-primary btn-block">Novo Anuncio</a>*@
+    <a class="btn btn-lg btn-primary btn-block" @Html.ActionLink("Novo Anuncio", "NovoAnuncio", "Anuncio", usuario, null)></a>
+    <br /><br /><br />
+    <main class="w3-content">       
         <div class="content-wrapper content-wrapper--with-bg">
             @if (usuario.ListaAnuncio.Count > 0)
             {

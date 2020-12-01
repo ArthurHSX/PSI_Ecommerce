@@ -31,9 +31,23 @@ namespace PSI_Ecommerce.Controllers
         }
 
         // GET: AnuncioController/Create
+        //[HttpGet]
+        //public IActionResult NovoAnuncio(Usuario usuario)
+        //{
+        //    return View();
+        //}
+
+        [HttpGet]
         public ActionResult NovoAnuncio(Usuario usuario)
         {
-            return View(usuario);
+            Anuncio anuncio = new Anuncio()
+            {
+                Usuario = usuario
+            };
+
+            ViewBag.Message = anuncio.Usuario;
+
+            return View("NovoAnuncio", anuncio);
         }
 
         // GET: AnuncioController/MeusAnuncios
@@ -54,7 +68,7 @@ namespace PSI_Ecommerce.Controllers
 
         // POST: AnuncioController/Create
         [HttpPost]
-        public ActionResult Create([Bind("TituloAnuncio, Descricao, Valor, Senha")] Anuncio anuncio, Usuario usuario)
+        public ActionResult Create([Bind("TituloAnuncio, Descricao, Valor, Usuario")] Anuncio anuncio)
         {
             // Redireciona para login
             try
