@@ -21,9 +21,9 @@ namespace PSI_Ecommerce.Controllers
                     var us = vwUsuario.BuscaUsuario(vwUsuario);
                     if (us != null)
                     {
-                        //return RedirectToAction("MeusAnuncios", "Anuncio", us);
-                        //return RedirectToRoute("MeusAnuncios", us);
+                        //return RedirectToRoute()
                         return RedirectToAction("MeusAnuncios", "Anuncio", us);
+                        //return RedirectToAction("MeusAnuncios", "Anuncio", us.ID);
                     }
                     else
                     {

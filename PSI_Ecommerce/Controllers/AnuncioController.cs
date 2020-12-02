@@ -51,6 +51,7 @@ namespace PSI_Ecommerce.Controllers
         }
 
         // GET: AnuncioController/MeusAnuncios
+        [HttpGet]
         public ActionResult MeusAnuncios(Usuario vwUsuario)
         {
             vwUsuario.BuscarAnunciosUsuario();
@@ -70,6 +71,8 @@ namespace PSI_Ecommerce.Controllers
         [HttpPost]
         public ActionResult Create([Bind("TituloAnuncio, Descricao, Valor, Usuario")] Anuncio anuncio)
         {
+            var usuario = ViewBag.message;
+
             // Redireciona para login
             try
             {
