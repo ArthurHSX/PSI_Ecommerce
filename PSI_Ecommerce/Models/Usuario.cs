@@ -32,34 +32,46 @@ namespace PSI_Ecommerce.Models
 
         public void ManterCadastro(Usuario _usuario)
         {
-            using (var contexto = new Context.EcommerceContext() )
+            try
             {
-                contexto.Usuario.Add(_usuario);
-                contexto.SaveChanges();
-            }                
+                using (var contexto = new Context.EcommerceContext())
+                {
+                    contexto.Usuario.Add(_usuario);
+                    contexto.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Não foi possível executar o comando no banco de Dados");
+            }
         }
 
         public Usuario BuscaUsuario(Usuario _usuario)
         {
-            if(String.IsNullOrEmpty(_usuario.Username) && String.IsNullOrEmpty(_usuario.Email))
-            { return null; }
-
-            using (var contexto = new Context.EcommerceContext())
+            try
             {
-                if (String.IsNullOrEmpty(_usuario.Username))
+                using (var contexto = new Context.EcommerceContext())
                 {
-                    return (from us in contexto.Usuario
-                            where us.Email == _usuario.Email
-                            select us).FirstOrDefault();
-                }
-                else if (String.IsNullOrEmpty(_usuario.Email))
-                {
-                    return (from us in contexto.Usuario
-                            where us.Username == _usuario.Username
-                            select us).FirstOrDefault();
+                    if (String.IsNullOrEmpty(_usuario.Username))
+                    {
+                        return (from us in contexto.Usuario
+                                where us.Email == _usuario.Email
+                                select us).FirstOrDefault();
+                    }
+                    else if (String.IsNullOrEmpty(_usuario.Email))
+                    {
+                        return (from us in contexto.Usuario
+                                where us.Username == _usuario.Username
+                                select us).FirstOrDefault();
+                    }
+                    else
+                        return null;
                 }
             }
-            return null;
+            catch (Exception)
+            {
+                throw new Exception("Não foi possível executar o comando no banco de Dados");
+            }
         }
 
         public Usuario BuscaUsuario(int _id)
@@ -67,11 +79,18 @@ namespace PSI_Ecommerce.Models
             if (_id <= 0)
             { return null; }
 
-            using (var contexto = new Context.EcommerceContext())
+            try
             {
-                return (from us in contexto.Usuario
-                        where us.ID == _id
-                        select us).FirstOrDefault();
+                using (var contexto = new Context.EcommerceContext())
+                {
+                    return (from us in contexto.Usuario
+                            where us.ID == _id
+                            select us).FirstOrDefault();
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Não foi possível executar o comando no banco de Dados");
             }
         }
 
@@ -80,7 +99,18 @@ namespace PSI_Ecommerce.Models
             throw new Exception("Implemmentar método de busca");
         }
 
-        public void BuscarAnunciosUsuario() => ListaAnuncio = (List<Anuncio>)new Anuncio().BuscarAnuncios(ID);
+        public void BuscarAnunciosUsuario()
+        {
+            try
+            {
+                this.ListaAnuncio = (List<Anuncio>)new Anuncio().BuscarTodosAnuncios(ID);
+            }
+            catch
+            {
+                this.ListaAnuncio = null;
+            }
+            
+        }
 
         #endregion
 

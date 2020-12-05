@@ -23,33 +23,44 @@ namespace PSI_Ecommerce.Models
 
         #region Métodos
 
-        public EcommerceContext GetAnuncio()
+        public void ManterAnuncio(Anuncio _anuncio)
         {
-            var contexto = new Context.EcommerceContext();
-            if (contexto != null)
+            try
             {
-                return contexto;
+                using (var contexto = new Context.EcommerceContext())
+                {
+                    //contexto.Anuncio.Add(_anuncio);
+                    contexto.Anuncio.Add(new Anuncio()
+                    {
+                        Valor = _anuncio.Valor,
+                        Descricao = _anuncio.Descricao,
+                        TituloAnuncio = _anuncio.TituloAnuncio,
+                        UsuarioId = _anuncio.Usuario.ID
+                    });
+                    contexto.SaveChanges();
+                }
             }
-            else
+            catch (Exception Ex)
             {
-                return null;
+                throw new Exception("Não foi possível executar o comando no banco de Dados");
             }
         }
 
-        public void ManterAnuncio(Anuncio _anuncio)
+        public void DeletarAnuncio(Anuncio _anuncio)
         {
-            using (var contexto = new Context.EcommerceContext())
+            try
             {
-                //contexto.Anuncio.Add(_anuncio);
-                contexto.Anuncio.Add(new Anuncio()
+                using (var contexto = new Context.EcommerceContext())
                 {
-                    Valor = _anuncio.Valor,
-                    Descricao = _anuncio.Descricao,
-                    TituloAnuncio = _anuncio.TituloAnuncio,
-                    UsuarioId = _anuncio.Usuario.ID
-                });
-                contexto.SaveChanges();
+                    contexto.Anuncio.Remove(contexto.Anuncio.Find(_anuncio.ID));
+                    contexto.SaveChanges();
+                }
             }
+            catch(Exception ex)
+            {
+                throw new Exception("Não foi possível executar o comando no banco de Dados");
+            }
+
         }
 
         public void BuscarFotos(int idAnuncio)
@@ -57,42 +68,39 @@ namespace PSI_Ecommerce.Models
             throw new NotImplementedException("Implemmentar método de busca");
         }
 
-        public IEnumerable<Anuncio> BuscarAnuncios(int idUsuario)
+        public IEnumerable<Anuncio> BuscarTodosAnuncios(int idUsuario)
         {
-            var contexto = new Context.EcommerceContext();
             try
             {
-                using (contexto)
+                using (var contexto = new Context.EcommerceContext())
                 {
                     return (from an in contexto.Anuncio
                             where an.UsuarioId == idUsuario
                             select an).ToList();
                 }
-
             }
             catch (Exception)
-            { 
-                return null; 
+            {
+                throw new Exception("Não foi possível executar o comando no banco de Dados");
             }
         }
 
-        public List<Anuncio> BuscarAnuncios()
+        public List<Anuncio> BuscarTodosAnuncios()
         {
-            var contexto = new Context.EcommerceContext();
             try
             {
-                using (contexto)
+                using (var contexto = new Context.EcommerceContext())
                 {
                     return (from an in contexto.Anuncio
                             select an).ToList();
                 }
-
             }
             catch (Exception)
             {
-                return null;
+                throw new Exception("Não foi possível executar o comando no banco de Dados");
             }
         }
+
         #endregion
     }
 }
