@@ -46,8 +46,7 @@ namespace PSI_Ecommerce.Models
                     Valor = _anuncio.Valor,
                     Descricao = _anuncio.Descricao,
                     TituloAnuncio = _anuncio.TituloAnuncio,
-                    Usuario = _anuncio.Usuario,
-                    UsuarioId = 5
+                    UsuarioId = _anuncio.Usuario.ID
                 });
                 contexto.SaveChanges();
             }

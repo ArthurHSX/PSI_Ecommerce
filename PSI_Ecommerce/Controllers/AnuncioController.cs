@@ -71,20 +71,21 @@ namespace PSI_Ecommerce.Controllers
         [HttpPost]
         public ActionResult Create([Bind("TituloAnuncio, Descricao, Valor, Usuario")] Anuncio anuncio)
         {
+            // ViewBag aparentemente não funciona passando dados da View -> Controller
             var usuario = ViewBag.message;
-
-            // Redireciona para login
             try
             {
                 if (ModelState.IsValid)
                 {
-                    // Receber usuario
-                    anuncio.Usuario = new Usuario()
-                    {
-                        ID = 12,
-                        Email = "aws@gmail.com",
-                        Username = "arthurwesley7"
-                    };
+                    // Receber usuario da VIEW
+                    // Caso o anuncio já possuir o objeto usuario só chamar o método manter
+
+                    //anuncio.Usuario = new Usuario()
+                    //{
+                    //    ID = 12,
+                    //    Email = "aws@gmail.com",
+                    //    Username = "arthurwesley7"
+                    //};
                     anuncio.ManterAnuncio(anuncio);
                 }
                 return RedirectToAction("MeusAnuncios", anuncio.Usuario);
