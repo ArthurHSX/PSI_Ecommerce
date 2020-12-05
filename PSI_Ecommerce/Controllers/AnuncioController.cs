@@ -81,17 +81,17 @@ namespace PSI_Ecommerce.Controllers
                     // Receber usuario
                     anuncio.Usuario = new Usuario()
                     {
-                        ID = 5,
-                        Email = "arthurwesley7@gmail.com",
+                        ID = 12,
+                        Email = "aws@gmail.com",
                         Username = "arthurwesley7"
                     };
                     anuncio.ManterAnuncio(anuncio);
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("MeusAnuncios", anuncio.Usuario);
             }
             catch (Exception ex)
             {
-                return View();
+                return View("MeusAnuncios");
             }
         }
 
