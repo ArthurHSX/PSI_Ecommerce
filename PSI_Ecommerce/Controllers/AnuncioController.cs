@@ -77,8 +77,6 @@ namespace PSI_Ecommerce.Controllers
 
 
             var usuario = ViewBag.message;
-
-            // Redireciona para login
             try
             {
                 if (ModelState.IsValid)
@@ -121,10 +119,10 @@ namespace PSI_Ecommerce.Controllers
             }
         }
 
-        // GET: AnuncioController/Delete/5
-        public ActionResult Delete(int id)
+        [HttpPost]
+        public IActionResult DeletarAnuncio([Bind("ID")] int id)
         {
-            return View();
+            return View("MeusAnuncios");
         }
 
         // POST: AnuncioController/Delete/5
@@ -147,7 +145,7 @@ namespace PSI_Ecommerce.Controllers
             Anuncio anuncio = new Anuncio();
             List<Anuncio> anunciosList = new List<Anuncio>();
 
-            if (anuncio.BuscarAnuncios() == null)
+            if (anuncio.BuscarTodosAnuncios() == null)
             {
                 for (int i = 0; i < 10; i++)
                 {
@@ -162,7 +160,7 @@ namespace PSI_Ecommerce.Controllers
             }
             else
             {
-                anunciosList = anuncio.BuscarAnuncios();
+                anunciosList = anuncio.BuscarTodosAnuncios();
             }
 
             return anunciosList;

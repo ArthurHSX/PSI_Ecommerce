@@ -7,20 +7,19 @@
     Usuario usuario = ViewBag.Message;
 }
 
-
-
 <div class="w3-content" style="max-width:1500px">
     <br />
     @*<a asp-area="" asp-controller="Anuncio" asp-action="NovoAnuncio" class="btn btn-lg btn-primary btn-block">Novo Anuncio</a>*@
-    <a class="btn btn-lg btn-primary btn-block" @Html.ActionLink("Novo Anuncio", "NovoAnuncio", "Anuncio", usuario, null) ></a>
+    <a class="btn btn-lg btn-primary btn-block" @Html.ActionLink("Novo Anuncio", "NovoAnuncio", "Anuncio", usuario, null)></a>
     <br /><br /><br />
-    <main class="w3-content">       
+    <main class="w3-content">
         <div class="content-wrapper content-wrapper--with-bg">
             @if (usuario.ListaAnuncio.Count > 0)
             {
-                <div class="list-group">
-                    @foreach (var anuncio in usuario.ListaAnuncio)
-                    {
+            <div class="list-group">
+                @foreach (var anuncio in usuario.ListaAnuncio)
+                {
+                    <form asp-controller="Anuncio" data-id="@anuncio.ID" method="post">
                         <a href="#" class="list-group-item">
                             <div class="media col-md-3">
                                 <figure class="pull-left">
@@ -51,13 +50,35 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-center">
-                                <p><small> Excluir Anuncio </small></p>
-                                <button type="button" class="btn btn-primary btn-sm btn-block">Editar</button>
+                                <button type="button" class="btn btn-primary btn-sm btn-warning">Editar</button>
+                                <br /><br />
+                                <button type="button" class="btn btn-primary btn-sm btn-danger" data-toggle="modal" data-target="#modalExcluir" data-id="@anuncio.ID">Excluir</button>
+                            </div>
+
+                            <div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ;>
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Confirma a exclusão?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Você tem certeza que deseja excluir o anuncio <b>@anuncio.TituloAnuncio</b> ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                                            <button asp-action="DeletarAnuncio" type="submit" class="btn btn-primary btn-danger">Excluir anuncio</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </a>
-                    }
+                    </form>
+                }
 
-                </div>
+            </div>
             }
 
         </div>
