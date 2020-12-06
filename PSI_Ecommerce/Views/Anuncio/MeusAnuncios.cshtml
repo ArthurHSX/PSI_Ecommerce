@@ -7,78 +7,69 @@
     Usuario usuario = ViewBag.Message;
 }
 
-<div class="w3-content" style="max-width:1500px">
-    <br />
-    @*<a asp-area="" asp-controller="Anuncio" asp-action="NovoAnuncio" class="btn btn-lg btn-primary btn-block">Novo Anuncio</a>*@
-    <a class="btn btn-lg btn-primary btn-block" @Html.ActionLink("Novo Anuncio", "NovoAnuncio", "Anuncio", usuario, null)></a>
-    <br /><br /><br />
+<div class="w3-content">
     <main class="w3-content">
         <div class="content-wrapper content-wrapper--with-bg">
+            <div>
+                <br />                
+                @Html.ActionLink("Novo Anuncio", "NovoAnuncio", "Anuncio", usuario, new { @class= "btn btn-lg btn-primary btn-block" })
+                <br />
+            </div>
             @if (usuario.ListaAnuncio.Count > 0)
             {
-            <div class="list-group">
-                @foreach (var anuncio in usuario.ListaAnuncio)
-                {
-                    <form asp-controller="Anuncio" data-id="@anuncio.ID" method="post">
-                        <a href="#" class="list-group-item">
-                            <div class="media col-md-3">
-                                <figure class="pull-left">
-                                    <img class="media-object img-rounded img-responsive" src="http://placehold.it/140x100" alt="placehold.it/140x100">
-                                </figure>
-                            </div>
-                            <div class="col-md-5">
-                                <h4 class="list-group-item-heading pb-3"> @anuncio.TituloAnuncio </h4>
-                                <p class="list-group-item-text"> @anuncio.Descricao </p>
-                            </div>
-                            <div class="col-md-3 pull-left">
-                                <div class="container col-md-12">
-                                    <div class="row">
-                                        <div class="co-md-12 pull-left">
-                                            <label for="nrTelefoneFixo"> Telefone Fixo </label>
-                                        </div>
+                <ul class="list-group">
+                    @foreach (var anuncio in usuario.ListaAnuncio)
+                    {
+                        
+                    <li class="list-group-item container">
+                        <div class="media col-md-3">
+                            <figure class="pull-left">
+                                <img class="media-object img-rounded img-responsive" src="http://placehold.it/140x100" alt="placehold.it/140x100">
+                            </figure>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="list-group-item-heading pb-3"> @anuncio.TituloAnuncio </h4>
+                            <p class="list-group-item-text"> @anuncio.Descricao </p>
+                        </div>
+                        <div class="col-md-2">
+                            <h4 class="list-group-item-heading pb-3"> R$ @anuncio.Valor </h4>
+                        </div>
+                        <div class="col-md-1 text-center">
+                            @Html.ActionLink("Editar", "Editar", "Anuncio", anuncio, new { @class = "btn btn-primary btn-sm btn-warning" })
+                            <br /><br />
+                            <button type="button" class="btn btn-primary btn-sm btn-danger" data-toggle="modal" data-target="#modalExcluir" data-id="@anuncio.ID">Excluir</button>
+                        </div>
+
+                        <div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ;>
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Confirma a exclusão?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                    <div class="row">
-                                        <div class="co-md-12 pull-left">
-                                            <label for="nrTelefoneCelular"> Telefone Celular </label>
-                                        </div>
+                                    <div class="modal-body">
+                                        Você tem certeza que deseja excluir o anuncio <b>@anuncio.TituloAnuncio </b> ?
                                     </div>
-                                    <div class="row">
-                                        <div class="co-md-12 pull-left">
-                                            <label for="nmContato"> @usuario.Nome </label>
-                                        </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                                        @Html.ActionLink("Excluir Anuncio", actionName: "DeletarAnuncio", controllerName: "Anuncio", anuncio, htmlAttributes: new { @class = "btn btn-primary btn-danger" })
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-1 text-center">
-                                <button type="button" class="btn btn-primary btn-sm btn-warning">Editar</button>
-                                <br /><br />
-                                <button type="button" class="btn btn-primary btn-sm btn-danger" data-toggle="modal" data-target="#modalExcluir" data-id="@anuncio.ID">Excluir</button>
-                            </div>
+                        </div>
+                    </li>
+                    }
 
-                            <div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ;>
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Confirma a exclusão?</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Você tem certeza que deseja excluir o anuncio <b>@anuncio.TituloAnuncio</b> ?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                                            <button asp-action="DeletarAnuncio" type="submit" class="btn btn-primary btn-danger">Excluir anuncio</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </form>
-                }
-
-            </div>
+                </ul>
+            }
+            else
+            {
+                <div>
+                    <br /> <br />
+                    <p>Você não possui anúncios cadastrados. Crie um clicando no botão acima!</p>
+                </div>
             }
 
         </div>

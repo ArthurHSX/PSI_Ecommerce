@@ -29,14 +29,21 @@ namespace PSI_Ecommerce.Models
             {
                 using (var contexto = new Context.EcommerceContext())
                 {
-                    //contexto.Anuncio.Add(_anuncio);
-                    contexto.Anuncio.Add(new Anuncio()
+                    if (_anuncio.ID == 0)
                     {
-                        Valor = _anuncio.Valor,
-                        Descricao = _anuncio.Descricao,
-                        TituloAnuncio = _anuncio.TituloAnuncio,
-                        UsuarioId = _anuncio.Usuario.ID
-                    });
+                        contexto.Anuncio.Add(new Anuncio()
+                        {
+                            Valor = _anuncio.Valor,
+                            Descricao = _anuncio.Descricao,
+                            TituloAnuncio = _anuncio.TituloAnuncio,
+                            UsuarioId = _anuncio.Usuario.ID
+                        });
+                    } 
+                    else
+                    {
+                        contexto.Anuncio.Update(_anuncio);
+                    }
+                    
                     contexto.SaveChanges();
                 }
             }
@@ -46,13 +53,13 @@ namespace PSI_Ecommerce.Models
             }
         }
 
-        public void DeletarAnuncio(Anuncio _anuncio)
+        public void DeletarAnuncio(int _anuncioID)
         {
             try
             {
                 using (var contexto = new Context.EcommerceContext())
                 {
-                    contexto.Anuncio.Remove(contexto.Anuncio.Find(_anuncio.ID));
+                    contexto.Anuncio.Remove(contexto.Anuncio.Find(_anuncioID));
                     contexto.SaveChanges();
                 }
             }
@@ -95,12 +102,28 @@ namespace PSI_Ecommerce.Models
                             select an).ToList();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw new Exception("Não foi possível executar o comando no banco de Dados");
+                throw new Exception("Não foi possível executar o comando no banco de Dados ", e);
             }
         }
 
+        public Anuncio BuscarAnuncio(int idAnuncio)
+        {
+            try
+            {
+                using (var contexto = new Context.EcommerceContext())
+                {
+                    return (from us in contexto.Anuncio
+                            where us.ID == idAnuncio
+                            select us).FirstOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Não foi possível executar o comando no banco de Dados", e);
+            }
+        }
         #endregion
     }
 }

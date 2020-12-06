@@ -45,8 +45,6 @@ namespace PSI_Ecommerce.Controllers
                 Usuario = usuario
             };
 
-            ViewBag.Message = anuncio.Usuario;
-
             return View("NovoAnuncio", anuncio);
         }
 
@@ -69,25 +67,17 @@ namespace PSI_Ecommerce.Controllers
 
         // POST: AnuncioController/Create
         [HttpPost]
-        public ActionResult Create([Bind("TituloAnuncio, Descricao, Valor, Usuario")] Anuncio anuncio)
+        public ActionResult Create([Bind(include: "TituloAnuncio, Descricao, Valor, UsuarioId")] Anuncio anuncio)
         {
 
-            // Usuario vindo nulo aqui!!
-
-
-
-            var usuario = ViewBag.message;
+            UsuarioController usuarioController = new UsuarioController();
+            
             try
             {
                 if (ModelState.IsValid)
                 {
                     // Receber usuario
-                    anuncio.Usuario = new Usuario()
-                    {
-                        ID = 12,
-                        Email = "aws@gmail.com",
-                        Username = "arthurwesley7"
-                    };
+                    anuncio.Usuario = usuarioController.buscarUsuarioPorId(anuncio.UsuarioId);
                     anuncio.ManterAnuncio(anuncio);
                 }
                 return RedirectToAction("MeusAnuncios", anuncio.Usuario);
@@ -98,31 +88,58 @@ namespace PSI_Ecommerce.Controllers
             }
         }
 
-        // GET: AnuncioController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Editar(Anuncio anuncio)
         {
-            return View();
+            UsuarioController userController = new UsuarioController();
+            anuncio.Usuario = userController.buscarUsuarioPorId(anuncio.UsuarioId);
+            return View("NovoAnuncio", anuncio);
         }
-
         // POST: AnuncioController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit([Bind(include: "TituloAnuncio, Descricao, Valor, ID, UsuarioId")] Anuncio anuncio)
         {
+            UsuarioController usuarioController = new UsuarioController();
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    // Receber usuario
+                    anuncio.Usuario = usuarioController.buscarUsuarioPorId(anuncio.UsuarioId);
+                    anuncio.ManterAnuncio(anuncio);
+                }
+                return RedirectToAction("MeusAnuncios", anuncio.Usuario);
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
         }
 
-        [HttpPost]
-        public IActionResult DeletarAnuncio([Bind("ID")] int id)
+        [HttpGet]
+        public ActionResult DeletarAnuncio(Anuncio anuncio)
         {
-            return View("MeusAnuncios");
+            UsuarioController usuarioController = new UsuarioController();
+          
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Usuario usuario = usuarioController.buscarUsuarioPorId(anuncio.UsuarioId);
+                    anuncio.DeletarAnuncio(anuncio.ID);
+                    return RedirectToAction("MeusAnuncios", usuario);
+                }
+                else
+                {
+                    return View("MeusAnuncios");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         // POST: AnuncioController/Delete/5
@@ -166,5 +183,17 @@ namespace PSI_Ecommerce.Controllers
             return anunciosList;
         }
 
+        public Anuncio GetAnuncioByID(int id)
+        {
+            try
+            {
+                Anuncio an = new Anuncio();
+                return an.BuscarAnuncio(id);
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
