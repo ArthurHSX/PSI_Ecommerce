@@ -71,6 +71,11 @@ namespace PSI_Ecommerce.Controllers
         [HttpPost]
         public ActionResult Create([Bind("TituloAnuncio, Descricao, Valor, Usuario")] Anuncio anuncio)
         {
+
+            // Usuario vindo nulo aqui!!
+
+
+
             var usuario = ViewBag.message;
 
             // Redireciona para login
