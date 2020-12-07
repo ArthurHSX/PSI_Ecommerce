@@ -14,9 +14,10 @@
             </label>
         </div>
         <div style="color: red;">@Html.ValidationMessage("usuario.Invalido") </div>
+        <a asp-area="" asp-controller="Login" asp-action="Cadastro" class="mt-5 mb-3 text-muted">Cadastre-se</a>
+        <br />
         <button asp-controller="Login" asp-action="BuscaUsuario" id="Logar" class="btn btn-lg btn-primary btn-block" type="Submit">
             Entrar
         </button>
-        <a asp-area="" asp-controller="Login" asp-action="Cadastro" class="mt-5 mb-3 text-muted">Cadastre-se</a>
     </form>
 </div>

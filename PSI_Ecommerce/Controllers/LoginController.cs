@@ -18,7 +18,7 @@ namespace PSI_Ecommerce.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var us = vwUsuario.BuscaUsuario(vwUsuario);
+                    var us = vwUsuario.ValidaLoginUsuario(vwUsuario);
                     if (us != null)
                     {
                         //return RedirectToRoute()
@@ -47,13 +47,16 @@ namespace PSI_Ecommerce.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastraUsuario([Bind("Nome, Username, Email, Senha")] Usuario usuario)
+        public IActionResult CadastraUsuario(Usuario usuario)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    //Persistir as informações do Usuario.
+                    if(string.IsNullOrWhiteSpace(usuario.Contato.TelefoneFixo) && string.IsNullOrWhiteSpace(usuario.Contato.TelefoneMovel))
+                    {
+                        usuario.Contato = null;
+                    }
                     usuario.ManterCadastro(usuario);
 
                     return RedirectToAction("MeusAnuncios", "Anuncio", usuario);

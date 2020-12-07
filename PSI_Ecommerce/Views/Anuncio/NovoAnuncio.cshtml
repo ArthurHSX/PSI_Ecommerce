@@ -18,9 +18,6 @@ else
 <div class="row">
     <div class="col-md-4">
         <form asp-action="NovoAnuncio" method="post">
-            <div class="form-group">
-                <label class="control-label"> @Model.Usuario.Nome </label>
-            </div>
             <div class="form-group hidden">
                 <input asp-for="UsuarioId" class="form-control" value="@Model.Usuario.ID" />
             </div>

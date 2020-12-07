@@ -24,12 +24,6 @@ namespace PSI_Ecommerce.Controllers
             }
         }
 
-        // GET: AnuncioController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: AnuncioController/Create
         //[HttpGet]
         //public IActionResult NovoAnuncio(Usuario usuario)
@@ -67,7 +61,7 @@ namespace PSI_Ecommerce.Controllers
 
         // POST: AnuncioController/Create
         [HttpPost]
-        public ActionResult Create([Bind(include: "TituloAnuncio, Descricao, Valor, UsuarioId")] Anuncio anuncio)
+        public ActionResult Create(Anuncio anuncio)
         {
 
             UsuarioController usuarioController = new UsuarioController();
@@ -95,6 +89,7 @@ namespace PSI_Ecommerce.Controllers
             anuncio.Usuario = userController.buscarUsuarioPorId(anuncio.UsuarioId);
             return View("NovoAnuncio", anuncio);
         }
+
         // POST: AnuncioController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -137,24 +132,20 @@ namespace PSI_Ecommerce.Controllers
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                return View("MeusAnuncios", anuncio.Usuario);
             }
         }
 
-        // POST: AnuncioController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [HttpGet]
+        public IActionResult DetalheAnuncio(Anuncio anuncio)
         {
-            try
+            if (anuncio == null) 
+                return View("Index");
+            else
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                anuncio.Usuario = new Usuario().BuscaUsuario(anuncio.UsuarioId);
+                return View(anuncio);
+            }                
         }
 
         public List<Anuncio> GetAnunciosMock()

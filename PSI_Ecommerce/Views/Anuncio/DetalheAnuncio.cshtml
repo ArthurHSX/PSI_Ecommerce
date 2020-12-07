@@ -1,0 +1,50 @@
+﻿@model Anuncio;
+
+<div class="w3-content" style="max-width:1500px">
+    <main class="l-main">
+        <div class="list-group-item container">
+            <div class="media col-md-3">
+                <figure class="pull-left">
+                    <img class="media-object img-rounded img-responsive" src="http://placehold.it/1200x900" alt="placehold.it/1200x900">
+                </figure>
+            </div>
+            <div class="col-md-7">
+                <div class="form-group">
+                    <h4><label class="control-label">@Model.TituloAnuncio </label></h4>
+                </div>
+                <div class="form-group">
+                    <p><label class="control-label">@Model.Descricao </label></p>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">R$ @Model.Valor </label>
+                </div>
+            </div>
+            @if (Model.Usuario != null)
+            {
+                <div class="form-group">
+                    <div>
+                        <h11><label class="control-label">Entre em contato :) </label></h11>
+                        <br /><br />
+                        <label class="control-label">@Model.Usuario.Nome </label>
+                    </div>
+                    <div>
+                        <label class="control-label">@Model.Usuario.Email </label>
+                    </div>
+                    @if (Model.Usuario.Contato != null)
+                    {
+                        <div>
+                            @if (!string.IsNullOrEmpty(Model.Usuario.Contato.TelefoneMovel))
+                            {
+                                <label class="control-label">Fixo: @Model.Usuario.Contato.TelefoneFixo </label>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.Usuario.Contato.TelefoneMovel))
+                            {
+                                <label class="control-label">Celular: @Model.Usuario.Contato.TelefoneMovel </label>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </main>
+</div>

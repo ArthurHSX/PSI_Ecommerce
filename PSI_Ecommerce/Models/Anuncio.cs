@@ -86,7 +86,7 @@ namespace PSI_Ecommerce.Models
                             select an).ToList();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new Exception("Não foi possível executar o comando no banco de Dados");
             }

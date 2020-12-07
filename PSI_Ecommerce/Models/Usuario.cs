@@ -16,6 +16,8 @@ namespace PSI_Ecommerce.Models
         public string Email { get; set; }
         public string Senha { get; set; }
         [NotMapped]
+        public Contato Contato { get; set; }
+        [NotMapped]
         public List<Anuncio> ListaAnuncio { get; set; }
         #endregion
 
@@ -39,14 +41,19 @@ namespace PSI_Ecommerce.Models
                     contexto.Usuario.Add(_usuario);
                     contexto.SaveChanges();
                 }
+                if (_usuario.Contato != null)
+                {
+                    _usuario.Contato.UsuarioId = _usuario.ID;
+                    _usuario.Contato.ManterContato(_usuario.Contato);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new Exception("Não foi possível executar o comando no banco de Dados");
             }
         }
 
-        public Usuario BuscaUsuario(Usuario _usuario)
+        private Usuario BuscaUsuario(Usuario _usuario)
         {
             try
             {
@@ -68,7 +75,7 @@ namespace PSI_Ecommerce.Models
                         return null;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new Exception("Não foi possível executar o comando no banco de Dados");
             }
@@ -81,14 +88,20 @@ namespace PSI_Ecommerce.Models
 
             try
             {
+                Usuario usuario;
                 using (var contexto = new Context.EcommerceContext())
                 {
-                    return (from us in contexto.Usuario
-                            where us.ID == _id
-                            select us).FirstOrDefault();
+                    usuario = (from us in contexto.Usuario
+                                where us.ID == _id
+                                select us).FirstOrDefault();
+
+                    usuario.Contato = new Contato().BuscaContato(usuario.ID);
+
+                    usuario.Senha = null;
                 }
+                return usuario;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new Exception("Não foi possível executar o comando no banco de Dados");
             }
@@ -110,6 +123,36 @@ namespace PSI_Ecommerce.Models
                 this.ListaAnuncio = null;
             }
             
+        }
+
+        public Usuario ValidaLoginUsuario(Usuario usuarioVW)
+        {
+            if (usuarioVW == null)
+                return null;
+
+            if (!string.IsNullOrEmpty(usuarioVW.Username) || !string.IsNullOrEmpty(usuarioVW.Email))
+            {
+                try
+                {
+                    Usuario usuarioBD = BuscaUsuario(usuarioVW);
+                    if (usuarioBD != null)
+                    {
+                        if (usuarioBD.Senha == usuarioVW.Senha)
+                        {
+                            usuarioVW.Senha = null;
+                            return usuarioVW;
+                        }
+                        else
+                            return null;
+                    }
+                } 
+                catch (Exception ex)
+                {
+                    return null;
+                }
+
+            }
+            return null;
         }
 
         #endregion

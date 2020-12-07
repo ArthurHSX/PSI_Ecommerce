@@ -3,51 +3,55 @@
 <div style="background-color: #f5f5f5; margin-top: 5%">
     <div class="container" style="background-color: white;">
         <div class="card-block">
-            @* O trecho abaixo está definido para chamar a action CadastraUsuario do Controller login para persistir*@
             <form asp-action="CadastraUsuario" asp-controller="Login" method="post">
                 <div class="form-group">
+                    <h3><label class="control-label">Faça seu cadastro com a gente :) </label></h3>
+                </div>
+                <div class="form-group">
                     <label class="control-label" for="Nome">Nome <h11>*</h11></label>
-                    
-                        @* asp-for referencia a propriedade da classe Usuario *@
-                        <input asp-for="Nome" placeholder="" class="form-control input-md" required="" type="text">
-                    
+                    <input asp-for="Nome" placeholder="" class="form-control input-md" required="" type="text">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="Username"> Username <h11>*</h11></label>
-                    
-                        @* asp-for referencia a propriedade da classe Usuario *@
-                        <input asp-for="Username" placeholder="" class="form-control input-md" required="" type="text">
-                    
+                    <input asp-for="Username" placeholder="" class="form-control input-md" required="" type="text">
                 </div>
-
                 <div class="form-group">
-                    <label class="control-label" @*asp-for="Email"*@>Email <h11>*</h11></label>
-                    
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                            <input asp-for="Email" class="form-control" placeholder="email@email.com"
-                                   required type="text">
-                    
+                    <label class="control-label">Email <h11>*</h11></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input asp-for="Email" class="form-control" placeholder="email@email.com"
+                               required type="text">
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label class="control-label" @*asp-for="Senha"*@>Senha <h11>*</h11></label>
-                    
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input asp-for="Senha" class="form-control" placeholder="*******" required type="password">
-                    
+                    <label class="control-label">Senha <h11>*</h11></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input asp-for="Senha" class="form-control" placeholder="*******" required type="password">
                     </div>
                 </div>
-                <!-- #f5f5f5; -->
+                <div class="form-group">
+                    <label class="control-label">Informações importantes para contato</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Telefone Fixo: <h11>*</h11></label>
+                    <div class="input-group">
+                        <input asp-for="Contato.TelefoneFixo" class="form-control input-md" pattern="^\([1-9]{2}\) ([2-8])[0-9]{3}\-[0-9]{4}$" placeholder="(31) 3333-3333" required="" type="tel">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Telefone Celular: <h11>*</h11></label>
+                    <div class="input-group">
+                        <input asp-for="Contato.TelefoneMovel" class="form-control input-md" pattern="^\([1-9]{2}\) (9[1-9])[0-9]{3}\-[0-9]{4}$" placeholder="(31) 98888-7777" required="" type="tel">
+                    </div>
+                </div>
                 <div class="form-group text-right">
                     <a asp-area="" asp-controller="Login" asp-action="Entrar" class="navbar-brand">Já tem uma conta? Faça login</a>
                     <button asp-area="" asp-controller="Login" asp-action="CadastraUsuario" id="Cadastrar" name="Cadastrar" class="btn btn-success" type="Submit">
                         Cadastrar
                     </button>
                 </div>
-            </form>        
+            </form>
         </div>
     </div>
 </div>

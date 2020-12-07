@@ -14,7 +14,6 @@
             <p><b><a asp-area="" asp-controller="Login" asp-action="Entrar" class="w3-center">Já tem uma conta? Faça login</a></b></p>
         </header>
     </div>
-
     <main class="l-main">
         <div class="content-wrapper content-wrapper--with-bg">
             @if (Model.Count > 0)
@@ -22,19 +21,21 @@
                 <ul class="list-group">
                     @foreach (var anuncio in Model)
                     {
-                        <li href="#" class="list-group-item container">
-                            <div class="media col-md-3">
-                                <figure class="pull-left">
-                                    <img class="media-object img-rounded img-responsive" src="http://placehold.it/140x100" alt="placehold.it/140x100">
-                                </figure>
-                            </div>
-                            <div class="col-md-7">
-                                <h4 class="list-group-item-heading pb-3"> @anuncio.TituloAnuncio </h4>
-                                <p class="list-group-item-text"> @anuncio.Descricao </p>
-                            </div>
-                            <div class="col-md-2 text-center">
-                                <button type="button" class="btn btn-primary btn-block">Abrir</button>
-                            </div>
+                        <li class="list-group-item container">
+                            <a href="@Url.Action("DetalheAnuncio", "Anuncio", anuncio)" @*class="elements"*@>
+                                <div class="media col-md-3">
+                                    <figure class="pull-left">
+                                        <img class="media-object img-rounded img-responsive" src="http://placehold.it/140x100" alt="placehold.it/140x100">
+                                    </figure>
+                                </div>
+                                <div class="col-md-7">
+                                    <h4 class="list-group-item-heading pb-3"> @anuncio.TituloAnuncio </h4>
+                                    <p class="list-group-item-text"> @anuncio.Descricao </p>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-outline-primary">Abrir</button>
+                                </div>
+                            </a>
                         </li>
                     }
 
